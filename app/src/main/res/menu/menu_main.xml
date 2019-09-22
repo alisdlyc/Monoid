@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_1">
+        <item
+          android:title="@string/app_name"
+          android:icon="@mipmap/home_top_user"
+          android:id="@+id/item_1">
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/group_2">
+        <item
+            android:title="@string/app_name"
+            android:icon="@mipmap/home_top_scanner"
+            android:id="@+id/item_2">
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/group_3">
+        <item
+            android:title="@string/app_name"
+            android:icon="@mipmap/home_bot_label"
+            android:id="@+id/item_3">
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/group_4">
+        <item
+            android:title="@string/app_name"
+            android:icon="@mipmap/home_bot_newbooks"
+            android:id="@+id/item_4">
+        </item>
+
+    </group>
+
+
+
+
+
+</menu>
