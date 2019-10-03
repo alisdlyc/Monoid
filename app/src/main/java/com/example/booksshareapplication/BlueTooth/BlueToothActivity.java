@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import com.example.booksshareapplication.Label.LabelActivity;
 import com.example.booksshareapplication.MainPage.MainActivity;
@@ -14,6 +15,7 @@ import com.example.booksshareapplication.R;
 
 public class BlueToothActivity extends AppCompatActivity {
 
+    private SearchView qwq;
     private Button mBtn_mainpage,mBtn_label,mBtn_bluetooth,mBtn_newbooks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainPage.MainActivity"
-    android:id="@+id/draw_main">
+    android:id="@+id/draw_main"
+   >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,6 +28,8 @@
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/iv_top_user"
             android:background="@drawable/search_main"
+            android:inputType="text"
+            app:menu="@menu/menu_search"
             >
         </SearchView>
 
@@ -69,7 +72,9 @@
                 </ImageView>
 
             <com.google.android.material.tabs.TabLayout
-                app:tabMinWidth="220dp"
+
+                app:tabMaxWidth="0dp"
+                app:tabIndicatorColor="#dfe0e2"
                 android:id="@+id/mid_tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -150,6 +155,7 @@
         app:headerLayout="@layout/dl_main"
         app:menu="@menu/menu_main">
     </com.google.android.material.navigation.NavigationView>
+
 
 
 

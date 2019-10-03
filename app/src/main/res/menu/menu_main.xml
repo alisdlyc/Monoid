@@ -3,8 +3,8 @@
     <group
         android:id="@+id/group_1">
         <item
-          android:title="@string/app_name"
-          android:icon="@mipmap/home_top_user"
+          android:title="北方园艺"
+          android:icon="@mipmap/bj_3"
           android:id="@+id/item_1">
         </item>
     </group>
@@ -12,8 +12,8 @@
     <group
         android:id="@+id/group_2">
         <item
-            android:title="@string/app_name"
-            android:icon="@mipmap/home_top_scanner"
+            android:title="新北方烹饪"
+            android:icon="@mipmap/bj_4"
             android:id="@+id/item_2">
         </item>
     </group>
@@ -21,8 +21,8 @@
     <group
         android:id="@+id/group_3">
         <item
-            android:title="@string/app_name"
-            android:icon="@mipmap/home_bot_label"
+            android:title="看呐！北方警车"
+            android:icon="@mipmap/bj_7"
             android:id="@+id/item_3">
         </item>
     </group>
@@ -30,8 +30,8 @@
     <group
         android:id="@+id/group_4">
         <item
-            android:title="@string/app_name"
-            android:icon="@mipmap/home_bot_newbooks"
+            android:title="给你糖哇"
+            android:icon="@mipmap/bj_9"
             android:id="@+id/item_4">
         </item>
 

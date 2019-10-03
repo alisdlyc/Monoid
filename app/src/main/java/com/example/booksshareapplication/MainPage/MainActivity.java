@@ -3,6 +3,8 @@ package com.example.booksshareapplication.MainPage;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,9 +14,14 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.example.booksshareapplication.BlueTooth.BlueToothActivity;
 import com.example.booksshareapplication.Label.LabelActivity;
@@ -37,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLauout;
     private Button mBtn_mainpage,mBtn_label,mBtn_bluetooth,mBtn_newbooks;
-    private String[] TabTitle={"借阅榜","评论榜"};
+    private String[] TabTitle={" "," "};
+//    private SearchView mSearchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,20 @@ public class MainActivity extends AppCompatActivity {
         mViewPager=findViewById(R.id.mid_viewpager);
         mIv_drawable=findViewById(R.id.iv_top_user);
         mDrawerLauout=findViewById(R.id.draw_main);
+//        mSearchView=findViewById(R.id.sv_top_search);
+//
+//        /*搜索图标是否显示在搜索框内*/
+//        mSearchView.setIconifiedByDefault(true);
+//        /*搜索框展开时是否显示提交按钮*/
+//        mSearchView.setSubmitButtonEnabled(true);
+//        /*将回车键设置为搜索*/
+//        mSearchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+//        /*搜索框是否展开,false表示展开*/
+//        mSearchView.setIconified(false);
+//        /*提示词*/
+//        mSearchView.setQueryHint("请输入要查询的书本名称");
+
+//        onCreateOptionsMenu()
 
         mBtn_mainpage=findViewById(R.id.home_bot_mainpage);
         mBtn_mainpage.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         mNavigationView.setItemIconTintList(null);
 
         //泛型存储Fragments
@@ -110,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     //实现主页面中部Tab中Fragment的适配器
     private class MyTabAdapter extends FragmentPagerAdapter{
