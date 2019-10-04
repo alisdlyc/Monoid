@@ -9,16 +9,16 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="286dp"
-        android:src="@mipmap/background">
+        android:src="@mipmap/submit">
     </ImageView>
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/PostId_submit"
         android:background="@drawable/input_style"
         android:layout_marginTop="52dp"
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:hint="用户名"
+        android:hint="学号"
         android:textSize="18sp"
         android:gravity="center_vertical"
         android:paddingLeft="25dp"
@@ -27,22 +27,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/PostId"
-        android:background="@drawable/input_style"
-        android:layout_marginTop="22dp"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:hint="学号"
-        android:textSize="18sp"
-        android:gravity="center_vertical"
-        android:paddingLeft="25dp"
-        android:maxLines="1"
-        android:maxLength="10"
-        android:inputType="number">
-    </EditText>
-
-    <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_submit"
         android:background="@drawable/input_style"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
@@ -56,12 +41,11 @@
     </EditText>
 
     <ImageView
-        android:id="@+id/signin"
+        android:id="@+id/submit_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
-        android:src="@mipmap/login"
-        android:onClick="Signin">
+        android:src="@mipmap/login">
     </ImageView>
 
 

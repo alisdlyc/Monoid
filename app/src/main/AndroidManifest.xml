@@ -17,18 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainPage.RegisterActivity"></activity>
         <activity android:name=".BlueTooth.BlueToothActivity" />
         <activity android:name=".Label.LabelActivity" />
         <activity android:name=".NewBooks.NewBooksActivity" />
         <activity
             android:name=".MainPage.MainActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

@@ -5,159 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainPage.MainActivity"
-    android:id="@+id/draw_main"
-   >
-
-    <RelativeLayout
+    android:id="@+id/draw_main">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/iv_top_user"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="16dp"
-            android:src="@mipmap/home_top_user">
-        </ImageView>
-
-        <SearchView
-            android:id="@+id/sv_top_search"
-            android:layout_width="251dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="21dp"
-            android:layout_marginTop="16dp"
-            android:layout_toRightOf="@id/iv_top_user"
-            android:background="@drawable/search_main"
-            android:inputType="text"
-            app:menu="@menu/menu_search"
-            >
-        </SearchView>
-
-        <ImageView
-            android:layout_width="23dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="21dp"
-            android:layout_marginTop="16dp"
-            android:layout_toRightOf="@id/sv_top_search"
-            android:src="@mipmap/home_top_scanner">
-        </ImageView>
-
-        <View
-            android:id="@+id/divided_top"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/divided_line"
-            android:layout_below="@id/sv_top_search">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/mid_contain"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="590dp"
-            android:background="#dfe0e2"
-            android:layout_below="@+id/divided_top">
-<!--            <ScrollView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="170dp"-->
-<!--                android:background="#a2aebb">-->
-<!--            </ScrollView>-->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:src="@mipmap/fake_mid_banner"
-                    android:scaleType="centerCrop">
-                </ImageView>
-
-            <com.google.android.material.tabs.TabLayout
-
-                app:tabMaxWidth="0dp"
-                app:tabIndicatorColor="#dfe0e2"
-                android:id="@+id/mid_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/mid_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </androidx.viewpager.widget.ViewPager>
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divided_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@drawable/divided_line"
-            android:layout_below="@id/mid_contain">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/bottom_contain"
-            android:layout_width="match_parent"
-            android:layout_height="86dp"
-            android:layout_below="@id/divided_bottom"
-            android:background="#f5f5f5">
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:id="@+id/home_bot_mainpage"
-                    android:checked="true"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="55dp"
-                    android:layout_width="28dp"
-                    android:layout_height="39dp"
-                    android:button="@drawable/home_bot_mainpage_selc">
-                </RadioButton>
-                <RadioButton
-                    android:id="@+id/home_bot_label"
-                    android:checked="false"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="57dp"
-                    android:layout_width="28dp"
-                    android:layout_height="39dp"
-                    android:button="@drawable/home_bot_label_selc">
-                </RadioButton>
-                <RadioButton
-                    android:id="@+id/home_bot_bluetooth"
-                    android:checked="false"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="53dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="39dp"
-                    android:button="@drawable/home_bot_bluetooth_selc">
-                </RadioButton>
-                <RadioButton
-                    android:id="@+id/home_bot_newbooks"
-                    android:checked="false"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="51dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="39dp"
-                    android:button="@drawable/home_bot_newbooks_selc">
-                </RadioButton>
-            </RadioGroup>
-        </LinearLayout>
-    </RelativeLayout>
-
-
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <EditText
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:id="@+id/books_search_text"
+            android:layout_width="233dp"
+            android:layout_height="32dp"
+            android:background="@drawable/searchboxstyle"
+            android:paddingLeft="15dp"
+            android:textSize="20sp"
+            android:textColor="#666666">
+        </EditText>
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/home_left_Ngv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         app:headerLayout="@layout/dl_main"
         app:menu="@menu/menu_main">
     </com.google.android.material.navigation.NavigationView>
-
-
-
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

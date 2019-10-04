@@ -10,11 +10,11 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="286dp"
-        android:src="@mipmap/background">
+        android:src="@mipmap/register">
     </ImageView>
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/name_register"
         android:background="@drawable/input_style"
         android:layout_marginTop="52dp"
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/PostId"
+        android:id="@+id/PostId_register"
         android:background="@drawable/input_style"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_register"
         android:background="@drawable/input_style"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
@@ -57,12 +57,11 @@
     </EditText>
 
     <ImageView
-        android:id="@+id/signin"
+        android:id="@+id/register_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
-        android:src="@mipmap/login"
-        android:onClick="Signin">
+        android:src="@mipmap/login">
     </ImageView>
 
 

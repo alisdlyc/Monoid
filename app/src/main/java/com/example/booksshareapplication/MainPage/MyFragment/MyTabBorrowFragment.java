@@ -1,4 +1,4 @@
-package com.example.booksshareapplication.MainPage.TabFragment;
+package com.example.booksshareapplication.MainPage.MyFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
