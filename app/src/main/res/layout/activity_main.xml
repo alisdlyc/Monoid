@@ -10,17 +10,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
-        <EditText
-            android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:id="@+id/books_search_text"
+        <RelativeLayout
             android:layout_width="233dp"
             android:layout_height="32dp"
-            android:background="@drawable/searchboxstyle"
-            android:paddingLeft="15dp"
-            android:textSize="20sp"
-            android:textColor="#666666">
-        </EditText>
+            android:background="@drawable/searchboxstyle">
+
+            <ImageView
+                android:id="@+id/books_search_sclecter"
+                android:paddingLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/books_search">
+            </ImageView>
+
+            <EditText
+                android:id="@+id/books_search_text"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/books_search_sclecter"
+                android:layout_height="30dp"
+                android:layout_width="150dp"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textSize="20sp"
+                android:textColor="#666666"
+                android:background="#fff"
+                android:inputType="text">
+            </EditText>
+
+            <ImageView
+                android:id="@+id/books_search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/search_icon"
+                android:layout_toRightOf="@+id/books_search_text">
+            </ImageView>
+
+        </RelativeLayout>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

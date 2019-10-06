@@ -7,16 +7,31 @@
     android:orientation="vertical"
     android:background="#f5f5f5">
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="286dp"
+        android:layout_height="80dp">
+    </FrameLayout>
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:src="@mipmap/register">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/sex_selecter"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="28dp"
+        android:src="@mipmap/sex_man"
+        android:scaleType="center">
     </ImageView>
 
     <EditText
         android:id="@+id/name_register"
         android:background="@drawable/input_style"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="22dp"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:hint="用户名"
@@ -28,7 +43,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/PostId_register"
+        android:id="@+id/StudentId_register"
         android:background="@drawable/input_style"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
@@ -54,6 +69,20 @@
         android:paddingLeft="25dp"
         android:maxLines="1"
         android:inputType="textPassword">
+    </EditText>
+
+    <EditText
+        android:id="@+id/department_register"
+        android:background="@drawable/input_style"
+        android:layout_marginTop="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:hint="学院"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:paddingLeft="25dp"
+        android:maxLines="1"
+        android:inputType="text">
     </EditText>
 
     <ImageView

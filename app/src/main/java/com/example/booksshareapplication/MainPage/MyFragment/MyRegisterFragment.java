@@ -1,5 +1,6 @@
 package com.example.booksshareapplication.MainPage.MyFragment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.booksshareapplication.R;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,12 +29,14 @@ import static com.example.booksshareapplication.MainPage.FirstSeeActivity.mBaseU
 
 public class MyRegisterFragment extends Fragment {
 
-    private EditText mEtName_rs,mEtPassword_rs,mEtPostId_rs;
+    private EditText mEtName_rs,mEtPassword_rs,mEtStudentId_rs,mEtDepartment_rs;
     private ImageView mIvSignin_rs;
     private MySubmitFragment mSmFragment;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
+    private ImageView mSexImageView;
+    private int IsMan=1;
+    public int status;
 
     @Nullable
     @Override
@@ -45,45 +50,91 @@ public class MyRegisterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mEtName_rs=view.findViewById(R.id.name_register);
         mEtPassword_rs=view.findViewById(R.id.password_register);
-        mEtPostId_rs=view.findViewById(R.id.PostId_register);
+        mEtStudentId_rs=view.findViewById(R.id.StudentId_register);
         mIvSignin_rs=view.findViewById(R.id.register_send);
-        sharedPreferences=getActivity().getSharedPreferences("BooksData",MODE_PRIVATE);
+        mSexImageView=view.findViewById(R.id.sex_selecter);
+        mEtDepartment_rs=view.findViewById(R.id.department_register);
+        sharedPreferences= Objects.requireNonNull(getActivity()).getSharedPreferences("BooksData",MODE_PRIVATE);
         editor=sharedPreferences.edit();
+
+        mSexImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(IsMan==1){
+                    mSexImageView.setImageResource(R.mipmap.sex_woman);
+                    IsMan=2;
+                }else{
+                    mSexImageView.setImageResource(R.mipmap.sex_man);
+                    IsMan=1;
+                }
+            }
+        });
+
 
         mIvSignin_rs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 OkHttpClient client = new OkHttpClient();
-//
+
                 RequestBody requestBody = new FormBody.Builder()
-                        .add("PostId", mEtPostId_rs.getText().toString())
-                        .add("name", mEtName_rs.getText().toString())
-                        .add("password", mEtPassword_rs.getText().toString())
+                        .add("PostId","2")
+                        .add("NAME", mEtName_rs.getText().toString())
+                        .add("PASSWORD", mEtPassword_rs.getText().toString())
+                        .add("STUDENTID",mEtStudentId_rs.getText().toString())
+                        .add("DEPARTMENT",mEtDepartment_rs.getText().toString())
+                        .add("SEX",((Integer)IsMan).toString())
                         .build();
 
-                Request request = new Request.Builder()
-                        .url(mBaseUrl)
-                        .post(requestBody)
-                        .addHeader("Content-Type", "application/x-www-form-urlencoded")
-                        .build();
+                //输入合法性判断,若合法则将数据传入数据库内
+                //否则弹出相应的错误提示
+                if(IsLegal()){
+                    Request request = new Request.Builder()
+                            .url(mBaseUrl)
+                            .post(requestBody)
+                            .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                            .build();
 
-                try {
-                    Response response = client.newCall(request).execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        //服务器返回的数据
+                        Response response = client.newCall(request).execute();
+                        status=Integer.parseInt(response.body().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    switch (status){
+                        case 0://未成功
+                            Toast.makeText(getContext(),"注册未成功，请稍后再试",Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1://成功注册
+                            //注册完毕之后使用登录页替换注册页所在的位置
+                            mSmFragment=new MySubmitFragment();
+                            Objects.requireNonNull(getFragmentManager()).beginTransaction().replace(R.id.fl_first_see,mSmFragment).commitAllowingStateLoss();
+
+                            try {
+                                Response response = client.newCall(request).execute();
+                                //已经成功注册
+                                editor.putString("STUDENTID",mEtStudentId_rs.getText().toString())
+                                        .putString("NAME",mEtName_rs.getText().toString())
+                                        .putString("PASSWORD",mEtPassword_rs.getText().toString())
+                                        .putBoolean("IsRegister",true)
+                                        .apply();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        case -1://用户名已经存在
+                            Toast.makeText(getContext(),"用户名已经存在",Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+
                 }
-                mSmFragment=new MySubmitFragment();
-                getFragmentManager().beginTransaction().replace(R.id.fl_first_see,mSmFragment).commitAllowingStateLoss();
-
-                //判断是否成功注册
-                editor.putString("PostId",mEtPostId_rs.getText().toString())
-                        .putString("name",mEtName_rs.getText().toString())
-                        .putString("password",mEtPassword_rs.getText().toString())
-                        .apply();
-                editor.putBoolean("IsRegister",true).apply();
             }
         });
     }
 
-
+    //判断用户的输入是否合法
+    private boolean IsLegal(){
+        return true;
+    }
 }

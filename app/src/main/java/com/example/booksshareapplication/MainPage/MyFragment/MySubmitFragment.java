@@ -9,20 +9,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.booksshareapplication.MainPage.FirstSeeActivity;
 import com.example.booksshareapplication.MainPage.MainActivity;
 import com.example.booksshareapplication.R;
 
+import java.io.IOException;
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MySubmitFragment extends Fragment {
-    private EditText mEtPostId_sm,mEtPassword_sm;
+    private EditText mEtStudentId_sm,mEtPassword_sm;
     private ImageView mIvSubmit;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    public int IsLogin=0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,19 +44,50 @@ public class MySubmitFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mIvSubmit=view.findViewById(R.id.submit_send);
-        mEtPostId_sm=view.findViewById(R.id.PostId_submit);
+        mEtStudentId_sm=view.findViewById(R.id.PostId_submit);
         mEtPassword_sm=view.findViewById(R.id.password_submit);
         //如果以及成功注册则从本地读取数据
         sharedPreferences=getActivity().getSharedPreferences("BooksData",Context.MODE_PRIVATE);
 
         if(sharedPreferences.getBoolean("IsRegister",false)){
-            mEtPostId_sm.setText(sharedPreferences.getString("PostId",""));
-            mEtPassword_sm.setText(sharedPreferences.getString("password",""));
+            mEtStudentId_sm.setText(sharedPreferences.getString("STUDENTID",""));
+            mEtPassword_sm.setText(sharedPreferences.getString("PASSWORD",""));
             mIvSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+                    //对用户名和密码进行检测
+                    OkHttpClient client = new OkHttpClient();
+
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("PostId", "1")
+                            .add("name", sharedPreferences.getString("STUDENT",""))
+                            .add("password", sharedPreferences.getString("PASSWORD",""))
+                            .build();
+
+                    Request request = new Request.Builder()
+                            .url("http://39.107.77.0:8080/web_war/api")
+                            .post(requestBody)
+                            .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                            .build();
+
+                    try {
+                        Response response = client.newCall(request).execute();
+                        IsLogin=Integer.parseInt(Objects.requireNonNull(response.body()).string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //假设为1时用户名与密码匹配，则登录成功
+                    switch (IsLogin){
+                        case 0:
+                            Toast.makeText(getContext(),"用户名或密码错误，请重新输入",Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1:
+                            editor.putBoolean("LoginSuccess",true);
+                            Intent intent=new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            break;
+                    }
+
                 }
             });
         }

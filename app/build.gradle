@@ -57,5 +57,6 @@ dependencies {
     implementation 'org.igniterealtime.smack:smack-extensions:4.1.9'
 
     implementation("com.squareup.okhttp3:okhttp:4.2.1")
+    implementation 'com.google.code.gson:gson:2.8.6'
 
 }

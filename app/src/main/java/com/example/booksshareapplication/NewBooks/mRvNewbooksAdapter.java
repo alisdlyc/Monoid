@@ -9,14 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.booksshareapplication.R;
+import com.example.booksshareapplication.Util.Course;
+
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.LinearViewHolder> {
     private Context mContext;
-    public mRvNewbooksAdapter(Context context){
+    private ArrayList<Course> mBoosData;
+    public mRvNewbooksAdapter(Context context,ArrayList<Course> mBooksData){
         this.mContext=context;
+        this.mBoosData=mBooksData;
     }
 
     @NonNull
@@ -30,10 +35,17 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
     @Override
     public void onBindViewHolder(@NonNull mRvNewbooksAdapter.LinearViewHolder holder, int position) {
 //        //修改布局文件中的控件
-//        holder.mIv_BookImage.setImageResource();
-//        holder.mTv_BookTitle.setText();
-//        holder.mTv_BookWriter.setText();
-//        holder.mTv_BookISBN.setText();
+//        for (int i=0;)
+
+        //如何进行activity之间的通信
+        for (int i=1;i<11;i++){
+//            holder.mIv_BookImage.setImageResource();
+            holder.mIv_BookImage.setImageResource(R.mipmap.bj_1);
+            holder.mTv_BookTitle.setText(mBoosData.get(i).BookName);
+            holder.mTv_BookWriter.setText(mBoosData.get(i).Writer);
+            holder.mTv_BookISBN.setText(mBoosData.get(i).IndexNumber);
+        }
+
 
     }
 
@@ -41,7 +53,7 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
     public int getItemCount() {
         //设置Linear Layout的长度
         //也就是最多的书本数目
-        return 30;
+        return 10;
     }
 
     class LinearViewHolder extends RecyclerView.ViewHolder{
