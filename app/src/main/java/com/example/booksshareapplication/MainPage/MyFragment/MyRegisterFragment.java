@@ -3,6 +3,8 @@ package com.example.booksshareapplication.MainPage.MyFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +44,13 @@ public class MyRegisterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_register,container,false);
+
+//        if(true){
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         return view;
     }
 
@@ -74,7 +83,7 @@ public class MyRegisterFragment extends Fragment {
         mIvSignin_rs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OkHttpClient client = new OkHttpClient();
+                final OkHttpClient client = new OkHttpClient();
 
                 RequestBody requestBody = new FormBody.Builder()
                         .add("PostId","2")
@@ -83,24 +92,40 @@ public class MyRegisterFragment extends Fragment {
                         .add("STUDENTID",mEtStudentId_rs.getText().toString())
                         .add("DEPARTMENT",mEtDepartment_rs.getText().toString())
                         .add("SEX",((Integer)IsMan).toString())
+//                        .add("SEX","1")
                         .build();
 
                 //输入合法性判断,若合法则将数据传入数据库内
                 //否则弹出相应的错误提示
                 if(IsLegal()){
-                    Request request = new Request.Builder()
+                    final Request request = new Request.Builder()
                             .url(mBaseUrl)
                             .post(requestBody)
                             .addHeader("Content-Type", "application/x-www-form-urlencoded")
                             .build();
 
-                    try {
-                        //服务器返回的数据
-                        Response response = client.newCall(request).execute();
-                        status=Integer.parseInt(response.body().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//
+//                    try {
+//
+//                        //服务器返回的数据
+//                        Response response = client.newCall(request).execute();
+//                        status=Integer.parseInt(Objects.requireNonNull(response.body()).string());
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Response response=client.newCall(request).execute();
+                                status=Integer.parseInt(Objects.requireNonNull(response.body().string()));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
 
                     switch (status){
                         case 0://未成功

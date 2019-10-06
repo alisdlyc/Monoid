@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.fragment.app.Fragment;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -30,19 +32,25 @@ import okhttp3.Response;
 public class MySubmitFragment extends Fragment {
     private EditText mEtStudentId_sm,mEtPassword_sm;
     private ImageView mIvSubmit;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    public SharedPreferences sharedPreferences;
+    public SharedPreferences.Editor editor;
     public int IsLogin=0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_submit,container,false);
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mIvSubmit=view.findViewById(R.id.submit_send);
         mEtStudentId_sm=view.findViewById(R.id.PostId_submit);
         mEtPassword_sm=view.findViewById(R.id.password_submit);
@@ -56,7 +64,7 @@ public class MySubmitFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     //对用户名和密码进行检测
-                    OkHttpClient client = new OkHttpClient();
+                    final OkHttpClient client = new OkHttpClient();
 
                     RequestBody requestBody = new FormBody.Builder()
                             .add("PostId", "1")
@@ -64,28 +72,53 @@ public class MySubmitFragment extends Fragment {
                             .add("password", sharedPreferences.getString("PASSWORD",""))
                             .build();
 
-                    Request request = new Request.Builder()
+                    final Request request = new Request.Builder()
                             .url("http://39.107.77.0:8080/web_war/api")
                             .post(requestBody)
                             .addHeader("Content-Type", "application/x-www-form-urlencoded")
                             .build();
 
-                    try {
-                        Response response = client.newCall(request).execute();
-                        IsLogin=Integer.parseInt(Objects.requireNonNull(response.body()).string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                         getActivity().runOnUiThread(new Runnable() {
+//                             @Override
+//                             public void run() {
+//                                 Response response = client.newCall(request).execute();
+//                                 IsLogin=Integer.parseInt(Objects.requireNonNull(response.body()).string());
+//                             }
+//                         });
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Response response=client.newCall(request).execute();
+                                IsLogin=Integer.parseInt(Objects.requireNonNull(response.body().string()));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                     //假设为1时用户名与密码匹配，则登录成功
                     switch (IsLogin){
-                        case 0:
+                        case -1:
                             Toast.makeText(getContext(),"用户名或密码错误，请重新输入",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            editor.putBoolean("LoginSuccess",true);
+//
+//
+//                            getActivity().runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    editor.putBoolean("LoginSuccess",true);
+//                                }
+//                            });
                             Intent intent=new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
+                            Toast.makeText(getContext(),"成功登录",Toast.LENGTH_SHORT).show();
                             break;
+
                     }
 
                 }

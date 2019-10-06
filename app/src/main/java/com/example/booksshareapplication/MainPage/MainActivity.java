@@ -10,7 +10,9 @@ import okhttp3.Response;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 //        if(true){
 ////            调用搜索模块
 
-            OkHttpClient client = new OkHttpClient();
+            final OkHttpClient client = new OkHttpClient();
 
             RequestBody requestBody = new FormBody.Builder()
                     .add("PostId", "3")
@@ -112,23 +114,70 @@ public class MainActivity extends AppCompatActivity {
                     .add("MaxNumber", "20")
                     .build();
 
-            Request request = new Request.Builder()
+            final Request request = new Request.Builder()
                     .url("http://39.107.77.0:8080/web_war/api")
                     .post(requestBody)
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .build();
 
-            //获取接收到的response
-            Response response = client.newCall(request).execute();
-            //response转Json
-            String mJson= Objects.requireNonNull(response.body()).string();
-            //使用Gson包将返回的responce转为Json串输出
-            Gson gson=new Gson();
-            mBooksData=gson.fromJson(mJson,new TypeToken<ArrayList<Course>>(){}.getType());
-            //通过intent将mBooksData传入NewBoosActivity中
-            Intent intent=new Intent(MainActivity.this,NewBooksActivity.class);
-            intent.putExtra("mBooksData",(Serializable) mBooksData);
-            startActivity(intent);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //获取接收到的response
+                    Response response = null;
+                    try {
+                        response = client.newCall(request).execute();
+                        String mJson= Objects.requireNonNull(response.body()).string()
+                                .replace("\\","")
+                                .replace("\"[","[")
+                                .replace("]\"","]");
+                        //使用Gson包将返回的responce转为Json串输出
+                        Gson gson=new Gson();
+//                        mBooksData=gson.fromJson(mJson,new TypeToken<ArrayList<Course>>(){}.getType());
+                        Course course=gson.fromJson(mJson,Course.class);
+                        Log.e("BooksData",course.toString());
+//                        Intent intent=new Intent(MainActivity.this,NewBooksActivity.class);
+////                        intent.putExtra("mBooksData",(Serializable) mBooksData);
+//                        intent.putExtra("mBooksCourse", (Serializable) course);
+//                        startActivity(intent);
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+//                    //response转Json
+//                    try {
+//                        Log.i("respose",response.body().string().replace("\\",""));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    String mJson= null;
+//                    try {
+//                        mJson = Objects.requireNonNull(response.body()).string().replace("\\","");
+//                    } catch (IOException e) {
+////                        e.printStackTrace();
+////                    }
+
+//                    //使用Gson包将返回的responce转为Json串输出
+//                    Gson gson=new Gson();
+//                    mBooksData=gson.fromJson(mJson,new TypeToken<ArrayList<Course>>(){}.getType());
+//                    //通过intent将mBooksData传入NewBoosActivity中
+                }
+            });
+//            //获取接收到的response
+//            Response response = client.newCall(request).execute();
+//            //response转Json
+//            Log.e("respose","----response----");
+//            String mJson= Objects.requireNonNull(response.body()).string().replace("\\","");
+//            //使用Gson包将返回的responce转为Json串输出
+//            Gson gson=new Gson();
+//            mBooksData=gson.fromJson(mJson,new TypeToken<ArrayList<Course>>(){}.getType());
+//            //通过intent将mBooksData传入NewBoosActivity中
+
+
+//            Intent intent=new Intent(MainActivity.this,NewBooksActivity.class);
+//            intent.putExtra("mBooksData",(Serializable) mBooksData);
+//            startActivity(intent);
 
         }
     }
