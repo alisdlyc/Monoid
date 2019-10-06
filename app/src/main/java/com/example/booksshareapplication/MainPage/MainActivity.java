@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -134,16 +135,24 @@ public class MainActivity extends AppCompatActivity {
                                 .replace("]\"","]");
                         //将数据转换化为Course的Arraylist
                         mBooksData=function(mJson);
+                        for(int i=0;i<mBooksData.size();i++){
+//                            Log.e("qwq",mBooksData.get(i).BookName);
+//                            Log.e("qwq",mBooksData.get(i).Writer);
+                        }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 }
             });
 
+//            for(int i=0;i<mBooksData.size();i++){
+//                Log.e("qwq",mBooksData.get(i).BookName);
+//                Log.e("qwq",mBooksData.get(i).Writer);
+//            }
+
             //通过intent将数据传入NewBooksActivity中，并且通过适配器填充数据到RecycleView中
             Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
             intent.putExtra("mBooksData",(Serializable) mBooksData);
-
             startActivity(intent);
         }
     }

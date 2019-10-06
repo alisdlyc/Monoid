@@ -1,6 +1,7 @@
 package com.example.booksshareapplication.NewBooks;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +36,12 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
     public void onBindViewHolder(@NonNull mRvNewbooksAdapter.LinearViewHolder holder, int position) {
     //修改RecycleView布局文件中的控件
 
-        //如何进行activity之间的通信
-        for (int i=0;i<mBoosData.size();i++){
-            holder.mIv_BookImage.setImageResource(R.mipmap.bj_4);
-            holder.mIv_BookImage.setImageResource(R.mipmap.bj_1);
-            holder.mTv_BookTitle.setText(mBoosData.get(i).BookName);
-            holder.mTv_BookWriter.setText(mBoosData.get(i).Writer);
-            holder.mTv_BookISBN.setText(mBoosData.get(i).IndexNumber);
-        }
+        //修改布局文件控件的值来输出所有的书籍
+        //根据positon的不同，来填入不同的书籍
+        holder.mIv_BookImage.setImageResource(R.mipmap.bj_4);
+        holder.mTv_BookTitle.setText(mBoosData.get(position).BookName);
+        holder.mTv_BookWriter.setText(mBoosData.get(position).Writer);
+        holder.mTv_BookISBN.setText(mBoosData.get(position).IndexNumber);
     }
 
     @Override
