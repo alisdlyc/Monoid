@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NewBooks.NewBooksActivity">
+    tools:context=".NewBooks.BooksShowActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -20,6 +20,7 @@
         android:background="@drawable/search_main">
     </SearchView>
     </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="33dp"

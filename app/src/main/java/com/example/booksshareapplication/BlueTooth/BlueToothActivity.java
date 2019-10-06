@@ -10,7 +10,7 @@ import android.widget.SearchView;
 
 import com.example.booksshareapplication.Label.LabelActivity;
 import com.example.booksshareapplication.MainPage.MainActivity;
-import com.example.booksshareapplication.NewBooks.NewBooksActivity;
+import com.example.booksshareapplication.NewBooks.BooksShowActivity;
 import com.example.booksshareapplication.R;
 
 public class BlueToothActivity extends AppCompatActivity {
@@ -57,7 +57,7 @@ public class BlueToothActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //跳转到newbooks演示界面
-                Intent intent=new Intent(BlueToothActivity.this, NewBooksActivity.class);
+                Intent intent=new Intent(BlueToothActivity.this, BooksShowActivity.class);
                 startActivity(intent);
             }
         });

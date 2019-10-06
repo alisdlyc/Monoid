@@ -10,21 +10,21 @@ import okhttp3.Response;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import com.example.booksshareapplication.NewBooks.NewBooksActivity;
+import com.example.booksshareapplication.NewBooks.BooksShowActivity;
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.Course;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             RequestBody requestBody = new FormBody.Builder()
                     .add("PostId", "3")
                     .add("Keyword", mSearchContext)
-                    .add("MaxNumber", "20")
+                    .add("MaxNumber", "50")
                     .build();
 
             final Request request = new Request.Builder()
@@ -123,64 +123,31 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //获取接收到的response
                     Response response = null;
                     try {
+                        //获取接收到的response
                         response = client.newCall(request).execute();
+                        //将response变为标准的json格式
                         String mJson= Objects.requireNonNull(response.body()).string()
                                 .replace("\\","")
                                 .replace("\"[","[")
                                 .replace("]\"","]");
-                        //使用Gson包将返回的responce转为Json串输出
-                        Gson gson=new Gson();
-//                        mBooksData=gson.fromJson(mJson,new TypeToken<ArrayList<Course>>(){}.getType());
-                        Course course=gson.fromJson(mJson,Course.class);
-                        Log.e("BooksData",course.toString());
-//                        Intent intent=new Intent(MainActivity.this,NewBooksActivity.class);
-////                        intent.putExtra("mBooksData",(Serializable) mBooksData);
-//                        intent.putExtra("mBooksCourse", (Serializable) course);
-//                        startActivity(intent);
-
-
-                    } catch (IOException e) {
+                        //将数据转换化为Course的Arraylist
+                        mBooksData=function(mJson);
+                    } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
-//                    //response转Json
-//                    try {
-//                        Log.i("respose",response.body().string().replace("\\",""));
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    String mJson= null;
-//                    try {
-//                        mJson = Objects.requireNonNull(response.body()).string().replace("\\","");
-//                    } catch (IOException e) {
-////                        e.printStackTrace();
-////                    }
-
-//                    //使用Gson包将返回的responce转为Json串输出
-//                    Gson gson=new Gson();
-//                    mBooksData=gson.fromJson(mJson,new TypeToken<ArrayList<Course>>(){}.getType());
-//                    //通过intent将mBooksData传入NewBoosActivity中
                 }
             });
-//            //获取接收到的response
-//            Response response = client.newCall(request).execute();
-//            //response转Json
-//            Log.e("respose","----response----");
-//            String mJson= Objects.requireNonNull(response.body()).string().replace("\\","");
-//            //使用Gson包将返回的responce转为Json串输出
-//            Gson gson=new Gson();
-//            mBooksData=gson.fromJson(mJson,new TypeToken<ArrayList<Course>>(){}.getType());
-//            //通过intent将mBooksData传入NewBoosActivity中
 
+            //通过intent将数据传入NewBooksActivity中，并且通过适配器填充数据到RecycleView中
+            Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
+            intent.putExtra("mBooksData",(Serializable) mBooksData);
 
-//            Intent intent=new Intent(MainActivity.this,NewBooksActivity.class);
-//            intent.putExtra("mBooksData",(Serializable) mBooksData);
-//            startActivity(intent);
-
+            startActivity(intent);
         }
     }
+    //监听右滑手势，打开抽屉
 //    @Override
 //    public boolean onTouchEvent(MotionEvent event) {
 //
@@ -208,4 +175,35 @@ public class MainActivity extends AppCompatActivity {
 //
 //        return false;
 //    }
+
+    public ArrayList<Course> function(String json) throws JSONException {
+        JSONObject obj = new JSONObject(json);
+        JSONArray Books = obj.getJSONArray("Books");
+
+        ArrayList<Course> data = new ArrayList<>();
+        Course temp = new Course();
+
+        for (int i = 0; i < Books.length(); i++) {
+            JSONObject jsonObject = Books.getJSONObject(i);
+            temp.Area = jsonObject.getString("Area");
+            temp.BookName = jsonObject.getString("BookName");
+            temp.IndexNumber = jsonObject.getString("indexNumber");
+            temp.Writer = jsonObject.getString("Writer");
+            temp.WriterInfo = jsonObject.getString("WriterInfo");
+            temp.Press = jsonObject.getString("Press");
+            temp.PressingYear = jsonObject.getString("PressingYear");
+            temp.BorringTimes = jsonObject.getString("BorrowingTimes");
+            temp.Department = jsonObject.getString("Department");
+            temp.Status = jsonObject.getString("Status");
+            temp.Floor = jsonObject.getString("Floor");
+            temp.Shelf = jsonObject.getString("Shelf");
+            temp.ShelfFloor = jsonObject.getString("ShelfFloor");
+            temp.DefaultComment = jsonObject.getString("DefaultComment");
+            temp.Star = jsonObject.getString("Star");
+
+            data.add(temp);
+        }
+
+        return data;
+    }
 }

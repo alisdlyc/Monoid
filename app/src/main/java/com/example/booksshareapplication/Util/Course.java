@@ -1,6 +1,8 @@
 package com.example.booksshareapplication.Util;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     public String BookName;     //书名
     public String IndexNumber;  //索书号
     public String Writer;       //作者

@@ -92,7 +92,6 @@ public class MyRegisterFragment extends Fragment {
                         .add("STUDENTID",mEtStudentId_rs.getText().toString())
                         .add("DEPARTMENT",mEtDepartment_rs.getText().toString())
                         .add("SEX",((Integer)IsMan).toString())
-//                        .add("SEX","1")
                         .build();
 
                 //输入合法性判断,若合法则将数据传入数据库内
@@ -103,17 +102,6 @@ public class MyRegisterFragment extends Fragment {
                             .post(requestBody)
                             .addHeader("Content-Type", "application/x-www-form-urlencoded")
                             .build();
-
-//
-//                    try {
-//
-//                        //服务器返回的数据
-//                        Response response = client.newCall(request).execute();
-//                        status=Integer.parseInt(Objects.requireNonNull(response.body()).string());
-//
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override

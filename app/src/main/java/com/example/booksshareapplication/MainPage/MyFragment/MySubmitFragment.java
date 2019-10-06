@@ -29,6 +29,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class MySubmitFragment extends Fragment {
     private EditText mEtStudentId_sm,mEtPassword_sm;
     private ImageView mIvSubmit;
@@ -55,7 +57,8 @@ public class MySubmitFragment extends Fragment {
         mEtStudentId_sm=view.findViewById(R.id.PostId_submit);
         mEtPassword_sm=view.findViewById(R.id.password_submit);
         //如果以及成功注册则从本地读取数据
-        sharedPreferences=getActivity().getSharedPreferences("BooksData",Context.MODE_PRIVATE);
+        sharedPreferences= Objects.requireNonNull(getActivity()).getSharedPreferences("BooksData",MODE_PRIVATE);
+        editor=sharedPreferences.edit();
 
         if(sharedPreferences.getBoolean("IsRegister",false)){
             mEtStudentId_sm.setText(sharedPreferences.getString("STUDENTID",""));
@@ -78,23 +81,13 @@ public class MySubmitFragment extends Fragment {
                             .addHeader("Content-Type", "application/x-www-form-urlencoded")
                             .build();
 
-//                    try {
-//                         getActivity().runOnUiThread(new Runnable() {
-//                             @Override
-//                             public void run() {
-//                                 Response response = client.newCall(request).execute();
-//                                 IsLogin=Integer.parseInt(Objects.requireNonNull(response.body()).string());
-//                             }
-//                         });
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-                    getActivity().runOnUiThread(new Runnable() {
+
+                    Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 Response response=client.newCall(request).execute();
-                                IsLogin=Integer.parseInt(Objects.requireNonNull(response.body().string()));
+                                IsLogin=Integer.parseInt(Objects.requireNonNull(Objects.requireNonNull(response.body()).string()));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -106,21 +99,13 @@ public class MySubmitFragment extends Fragment {
                             Toast.makeText(getContext(),"用户名或密码错误，请重新输入",Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-//
-//
-//                            getActivity().runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    editor.putBoolean("LoginSuccess",true);
-//                                }
-//                            });
+                            //成功登录之后记录登录信息，在下次打开App的时候直接跳转到搜索界面
+                            editor.putBoolean("LoginSuccess",true);
                             Intent intent=new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(getContext(),"成功登录",Toast.LENGTH_SHORT).show();
                             break;
-
                     }
-
                 }
             });
         }

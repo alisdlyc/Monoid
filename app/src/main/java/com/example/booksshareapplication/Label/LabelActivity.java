@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.example.booksshareapplication.BlueTooth.BlueToothActivity;
 import com.example.booksshareapplication.MainPage.MainActivity;
-import com.example.booksshareapplication.NewBooks.NewBooksActivity;
+import com.example.booksshareapplication.NewBooks.BooksShowActivity;
 import com.example.booksshareapplication.R;
 
 public class LabelActivity extends AppCompatActivity {
@@ -55,7 +55,7 @@ public class LabelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //跳转到newbooks演示界面
-                Intent intent=new Intent(LabelActivity.this, NewBooksActivity.class);
+                Intent intent=new Intent(LabelActivity.this, BooksShowActivity.class);
                 startActivity(intent);
             }
         });

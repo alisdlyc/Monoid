@@ -27,33 +27,29 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
     @NonNull
     @Override
     public mRvNewbooksAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         //传入需要的布局文件
        return new LinearViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_rv_newbooks,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull mRvNewbooksAdapter.LinearViewHolder holder, int position) {
-//        //修改布局文件中的控件
-//        for (int i=0;)
+    //修改RecycleView布局文件中的控件
 
         //如何进行activity之间的通信
-        for (int i=1;i<11;i++){
-//            holder.mIv_BookImage.setImageResource();
+        for (int i=0;i<mBoosData.size();i++){
+            holder.mIv_BookImage.setImageResource(R.mipmap.bj_4);
             holder.mIv_BookImage.setImageResource(R.mipmap.bj_1);
             holder.mTv_BookTitle.setText(mBoosData.get(i).BookName);
             holder.mTv_BookWriter.setText(mBoosData.get(i).Writer);
             holder.mTv_BookISBN.setText(mBoosData.get(i).IndexNumber);
         }
-
-
     }
 
     @Override
     public int getItemCount() {
         //设置Linear Layout的长度
         //也就是最多的书本数目
-        return 10;
+        return mBoosData.size();
     }
 
     class LinearViewHolder extends RecyclerView.ViewHolder{
