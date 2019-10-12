@@ -1,29 +1,22 @@
 package com.example.booksshareapplication.NewBooks;
-
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.booksshareapplication.MainPage.MainActivity;
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.BooksInfoCourse;
 import com.example.booksshareapplication.Util.Course;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.FormBody;
@@ -32,14 +25,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.app.PendingIntent.getActivity;
-
 public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.LinearViewHolder> {
     private Context mContext;
     private ArrayList<Course> BooksData;
     public ArrayList<BooksInfoCourse> mBooksInfo;
     public int mPosition;
-
     public mRvNewbooksAdapter(Context context,ArrayList<Course> mBooksData){
         this.mContext=context;
         this.BooksData =mBooksData;
@@ -67,52 +57,45 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
             public void onClick(View v) {
                 Toast.makeText(mContext,"BooksName"+ BooksData.get(position).html,Toast.LENGTH_LONG).show();
 
-                mPosition=position;
-                new GetBooksInfo().start();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        OkHttpClient client = new OkHttpClient();
 
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("PostId", "6")
+                                .add("Keyword", BooksData.get(mPosition).html.toString())
+                                .build();
+
+                        Request request = new Request.Builder()
+                                .url("http://39.107.77.0:8080/web_war/api")
+                                .post(requestBody)
+                                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                                .build();
+
+                        try {
+                            Response response = client.newCall(request).execute();
+
+                            String mJson = Objects.requireNonNull(response.body()).string()
+                                    .replace("\\","")
+                                    .replace("\"[","[")
+                                    .replace("]\"","]");
+                            //将返回的response数据标准json格式化
+
+                            mBooksInfo =function(mJson);
+
+                            //将图书详情发送到BookInfoActivity中
+                            Intent intent=new Intent(mContext, BooksInfoActivity.class);
+                            intent.putExtra("mBooksInfo",(Serializable) mBooksInfo);
+                            mContext.startActivity(intent);
+
+                        } catch (IOException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
         });
-    }
-
-
-    private class GetBooksInfo extends Thread{
-        @Override
-        public void run() {
-            super.run();
-
-            OkHttpClient client = new OkHttpClient();
-
-            RequestBody requestBody = new FormBody.Builder()
-                    .add("PostId", "6")
-                    .add("Keyword", BooksData.get(mPosition).html.toString())
-                    .build();
-
-            Request request = new Request.Builder()
-                    .url("http://39.107.77.0:8080/web_war/api")
-                    .post(requestBody)
-                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-
-                String mJson = Objects.requireNonNull(response.body()).string()
-                        .replace("\\","")
-                        .replace("\"[","[")
-                        .replace("]\"","]");
-                //将返回的response数据标准json格式化
-
-                mBooksInfo =function(mJson);
-
-                //将图书详情发送到BookInfoActivity中
-                Intent intent=new Intent(mContext, BooksInfoActivity.class);
-                intent.putExtra("mBooksInfo",(Serializable) mBooksInfo);
-                mContext.startActivity(intent);
-
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 
