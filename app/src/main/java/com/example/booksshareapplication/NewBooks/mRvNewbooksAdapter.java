@@ -2,6 +2,7 @@ package com.example.booksshareapplication.NewBooks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,10 +68,12 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
                 Toast.makeText(mContext,"BooksName"+ BooksData.get(position).html,Toast.LENGTH_LONG).show();
 
                 mPosition=position;
-                new GetBooksInfo().run();
+                new GetBooksInfo().start();
+
             }
         });
     }
+
 
     private class GetBooksInfo extends Thread{
         @Override
@@ -137,7 +140,6 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
             temp.ShelfFloor = jsonObject.getString("ShelfFloor");
             temp.DefaultComment = jsonObject.getString("DefaultComment");
             temp.Star = jsonObject.getString("Star");
-            temp.html=jsonObject.getString("html");
             data.add(temp);
         }
 
