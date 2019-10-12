@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.Course;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.LinearViewHolder> {
     private Context mContext;
     private ArrayList<Course> mBoosData;
+
     public mRvNewbooksAdapter(Context context,ArrayList<Course> mBooksData){
         this.mContext=context;
         this.mBoosData=mBooksData;
@@ -33,16 +36,25 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull mRvNewbooksAdapter.LinearViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull mRvNewbooksAdapter.LinearViewHolder holder, final int position) {
     //修改RecycleView布局文件中的控件
 
         //修改布局文件控件的值来输出所有的书籍
         //根据positon的不同，来填入不同的书籍
         holder.mIv_BookImage.setImageResource(R.mipmap.bj_4);
         holder.mTv_BookTitle.setText(mBoosData.get(position).BookName);
-        holder.mTv_BookWriter.setText(mBoosData.get(position).Writer);
-        holder.mTv_BookISBN.setText(mBoosData.get(position).IndexNumber);
+        holder.mTv_BookWriter.setText(mBoosData.get(position).Press);
+        holder.mTv_BookISBN.setText(mBoosData.get(position).PressingYear);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"BooksName"+mBoosData.get(position).html,Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -63,4 +75,8 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
             mTv_BookISBN=itemView.findViewById(R.id.rv_newbooks_ISBN);
         }
     }
+    public interface OnItemClickListener{
+        void onClick(int pos);
+    }
+
 }

@@ -100,7 +100,7 @@ public class MySubmitFragment extends Fragment {
                             break;
                         case 1:
                             //成功登录之后记录登录信息，在下次打开App的时候直接跳转到搜索界面
-                            editor.putBoolean("LoginSuccess",true);
+                            editor.putBoolean("LoginSuccess",true).apply();
                             Intent intent=new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(getContext(),"成功登录",Toast.LENGTH_SHORT).show();

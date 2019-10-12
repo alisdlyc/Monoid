@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.Course;
@@ -22,6 +25,7 @@ public class BooksShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_books);
+
         mRv_newbooks=findViewById(R.id.newbooks_center_rv);
         mRv_newbooks.setLayoutManager(new LinearLayoutManager(BooksShowActivity.this));
         //创建intent对象用于接收数据
@@ -36,6 +40,9 @@ public class BooksShowActivity extends AppCompatActivity {
 //        }
 
         //将服务器端返回的书籍数据传入适配器中
+//        mRv_newbooks.setAdapter(new mRvNewbooksAdapter(BooksShowActivity.this,new mRvNewbooksAdapterBooksShowActivity.this,mBooksData),new On);
+//        mRv_newbooks.setAdapter(new mRvNewbooksAdapter(BooksShowActivity.this,new mRvNewbooksAdapter.)
         mRv_newbooks.setAdapter(new mRvNewbooksAdapter(BooksShowActivity.this,mBooksData));
+
     }
 }

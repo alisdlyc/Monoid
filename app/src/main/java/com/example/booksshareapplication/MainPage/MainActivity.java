@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Course> mBooksData;
     private ImageView mSearchIcon;
 
+    public String mSearchContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,12 +102,145 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void search() throws IOException {
-        String mSearchContext=mEditText.getText().toString().trim();
+        mSearchContext=mEditText.getText().toString().trim();
         if(TextUtils.isEmpty(mSearchContext)){
             //输入为空
         }else {
+            new GetBooksInfo().start();
+            Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
+            intent.putExtra("mBooksData",(Serializable) mBooksData);
+            startActivity(intent);
+
 //        if(true){
 ////            调用搜索模块
+
+//            final OkHttpClient client = new OkHttpClient();
+//
+//            RequestBody requestBody = new FormBody.Builder()
+//                    .add("PostId", "3")
+//                    .add("Keyword", mSearchContext)
+//                    .add("MaxNumber", "50")
+//                    .build();
+//
+//            final Request request = new Request.Builder()
+//                    .url("http://39.107.77.0:8080/web_war/api")
+//                    .post(requestBody)
+//                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+//                    .build();
+//
+//
+////            runOnUiThread(new Runnable() {
+//////                @Override
+//////                public void run() {
+//////                    Response response = null;
+//////                    try {
+//////                        //获取接收到的response
+//////                        response = client.newCall(request).execute();
+//////                        //将response变为标准的json格式
+//////                        String mJson= Objects.requireNonNull(response.body()).string()
+//////                                .replace("\\","")
+//////                                .replace("\"[","[")
+//////                                .replace("]\"","]");
+//////                        //将数据转换化为Course的Arraylist
+//////                        mBooksData=function(mJson);
+//////
+//////                    } catch (IOException | JSONException e) {
+//////                        e.printStackTrace();
+//////                    }
+//////                }
+//////            });
+//
+////            new Thread(new Runnable() {
+////                @Override
+////                public void run() {
+////
+////                    try {
+////                        Response response = client.newCall(request).execute();
+////
+////                        //将response变为标准的json格式
+////                        String mJson= Objects.requireNonNull(response.body()).string()
+////                                .replace("\\","")
+////                                .replace("\"[","[")
+////                                .replace("]\"","]");
+////
+////                        //将数据转换化为Course的Arraylist
+////                        mBooksData=function(mJson);
+////
+////                    } catch (IOException e) {
+////                        e.printStackTrace();
+////                    } catch (JSONException e) {
+////                        e.printStackTrace();
+////                    }
+////                }
+////            });
+//            Log.e("qwq","是测试");
+//
+////            new Thread().start();
+//
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    Log.e("qwq","也是测试");
+//                    try {
+//                        Response response = client.newCall(request).execute();
+//
+//                        String mJson = Objects.requireNonNull(response.body()).string();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    //将response变为标准的json格式
+//                    String mJson= null;
+//                    //                        mJson = Objects.requireNonNull(response.body()).string();
+////                                .replace("\\","")
+////                                .replace("\"[","[")
+////                                .replace("]\"","]");
+//
+//
+//                    //将数据转换化为Course的Arraylist
+//                    try {
+//                        mBooksData=function(mJson);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//            Log.e("qwq","还是测试");
+////            Response response=client.newCall(request).execute();
+////            //将response变为标准的json格式
+////            String mJson= Objects.requireNonNull(response.body()).string()
+////                    .replace("\\","")
+////                    .replace("\"[","[")
+////                    .replace("]\"","]");
+////
+////            //将数据转换化为Course的Arraylist
+////            try {
+////                mBooksData=function(mJson);
+////            } catch (JSONException e) {
+////                e.printStackTrace();
+////            }
+//
+//            //通过intent将数据传入NewBooksActivity中，并且通过适配器填充数据到RecycleView中
+//            Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
+//            intent.putExtra("mBooksData",(Serializable) mBooksData);
+//            startActivity(intent);
+//
+////            for(int i=0;i<mBooksData.size();i++){
+////                Log.e("qwq",mBooksData.get(i).BookName);
+////                Log.e("qwq",mBooksData.get(i).Writer);
+////            }
+//
+////            //通过intent将数据传入NewBooksActivity中，并且通过适配器填充数据到RecycleView中
+////            Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
+////            intent.putExtra("mBooksData",(Serializable) mBooksData);
+////            startActivity(intent);
+        }
+
+    }
+    public class GetBooksInfo extends Thread{
+        @Override
+        public void run() {
+            super.run();
 
             final OkHttpClient client = new OkHttpClient();
 
@@ -121,41 +256,39 @@ public class MainActivity extends AppCompatActivity {
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .build();
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Response response = null;
-                    try {
-                        //获取接收到的response
-                        response = client.newCall(request).execute();
-                        //将response变为标准的json格式
-                        String mJson= Objects.requireNonNull(response.body()).string()
-                                .replace("\\","")
-                                .replace("\"[","[")
-                                .replace("]\"","]");
-                        //将数据转换化为Course的Arraylist
-                        mBooksData=function(mJson);
-                        for(int i=0;i<mBooksData.size();i++){
-//                            Log.e("qwq",mBooksData.get(i).BookName);
-//                            Log.e("qwq",mBooksData.get(i).Writer);
-                        }
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            Response response = null;
+            try {
+                response = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                String mJson = Objects.requireNonNull(response.body()).string();
+                mBooksData=function(mJson);
 
-//            for(int i=0;i<mBooksData.size();i++){
-//                Log.e("qwq",mBooksData.get(i).BookName);
-//                Log.e("qwq",mBooksData.get(i).Writer);
-//            }
+                Log.e("qwq","跳转吧，求求你");
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
+//                        intent.putExtra("mBooksData",(Serializable) mBooksData);
+//                        startActivity(intent);
+//                    }
+//                });
+//                Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
+//                intent.putExtra("mBooksData",(Serializable) mBooksData);
+//                startActivity(intent);
 
-            //通过intent将数据传入NewBooksActivity中，并且通过适配器填充数据到RecycleView中
-            Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
-            intent.putExtra("mBooksData",(Serializable) mBooksData);
-            startActivity(intent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
+
     //监听右滑手势，打开抽屉
 //    @Override
 //    public boolean onTouchEvent(MotionEvent event) {
@@ -190,25 +323,27 @@ public class MainActivity extends AppCompatActivity {
         JSONArray Books = obj.getJSONArray("Books");
 
         ArrayList<Course> data = new ArrayList<>();
-        Course temp = new Course();
+
 
         for (int i = 0; i < Books.length(); i++) {
+            Course temp = new Course();
             JSONObject jsonObject = Books.getJSONObject(i);
-            temp.Area = jsonObject.getString("Area");
+//            temp.Area = jsonObject.getString("Area");
             temp.BookName = jsonObject.getString("BookName");
-            temp.IndexNumber = jsonObject.getString("indexNumber");
-            temp.Writer = jsonObject.getString("Writer");
-            temp.WriterInfo = jsonObject.getString("WriterInfo");
+//            temp.IndexNumber = jsonObject.getString("indexNumber");
+//            temp.Writer = jsonObject.getString("Writer");
+//            temp.WriterInfo = jsonObject.getString("WriterInfo");
             temp.Press = jsonObject.getString("Press");
             temp.PressingYear = jsonObject.getString("PressingYear");
-            temp.BorringTimes = jsonObject.getString("BorrowingTimes");
-            temp.Department = jsonObject.getString("Department");
-            temp.Status = jsonObject.getString("Status");
-            temp.Floor = jsonObject.getString("Floor");
-            temp.Shelf = jsonObject.getString("Shelf");
-            temp.ShelfFloor = jsonObject.getString("ShelfFloor");
-            temp.DefaultComment = jsonObject.getString("DefaultComment");
-            temp.Star = jsonObject.getString("Star");
+//            temp.BorringTimes = jsonObject.getString("BorrowingTimes");
+//            temp.Department = jsonObject.getString("Department");
+//            temp.Status = jsonObject.getString("Status");
+//            temp.Floor = jsonObject.getString("Floor");
+//            temp.Shelf = jsonObject.getString("Shelf");
+//            temp.ShelfFloor = jsonObject.getString("ShelfFloor");
+//            temp.DefaultComment = jsonObject.getString("DefaultComment");
+//            temp.Star = jsonObject.getString("Star");
+            temp.html=jsonObject.getString("html");
 
             data.add(temp);
         }
