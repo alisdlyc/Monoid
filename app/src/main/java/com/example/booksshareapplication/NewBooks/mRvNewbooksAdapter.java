@@ -45,7 +45,6 @@ public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.
         holder.mTv_BookTitle.setText(mBoosData.get(position).BookName);
         holder.mTv_BookWriter.setText(mBoosData.get(position).Press);
         holder.mTv_BookISBN.setText(mBoosData.get(position).PressingYear);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

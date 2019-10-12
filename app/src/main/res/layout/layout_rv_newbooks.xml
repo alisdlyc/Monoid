@@ -26,6 +26,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="20sp"
             android:textColor="#3389c6"
+            android:singleLine="true"
             android:text="北方栖姬选集">
         </TextView>
 
@@ -46,6 +47,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="14sp"
             android:text="标准书号:233-2333-2333-2333"
+
             android:textColor="#999999">
         </TextView>
 

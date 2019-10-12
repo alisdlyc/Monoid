@@ -18,5 +18,5 @@ public class Course implements Serializable {
 //    public String ShelfFloor;
 //    public String DefaultComment;//书籍简介
 //    public String Star;
-    public String html;
+    public String html;//用于对图书详情页的检索
 }
