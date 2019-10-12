@@ -1,26 +1,22 @@
 package com.example.booksshareapplication.NewBooks;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.example.booksshareapplication.R;
+import com.example.booksshareapplication.Util.BooksInfoCourse;
 import com.example.booksshareapplication.Util.Course;
 
 import java.util.ArrayList;
 
-public class BooksShowActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class BooksInfoActivity extends AppCompatActivity {
     private RecyclerView mRv_newbooks;
     public Intent intent;
-    public ArrayList<Course> mBooksData;
+    public ArrayList<BooksInfoCourse> mBooksInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +24,12 @@ public class BooksShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_books);
 
         mRv_newbooks=findViewById(R.id.newbooks_center_rv);
-        mRv_newbooks.setLayoutManager(new LinearLayoutManager(BooksShowActivity.this));
+        mRv_newbooks.setLayoutManager(new LinearLayoutManager(BooksInfoActivity.this));
         //创建intent对象用于接收数据
         intent=getIntent();
 //        mBooksData=(ArrayList<Course>)intent.getSerializableExtra("mBooksData");
         //接受intent传入的书籍
-        mBooksData=(ArrayList<Course>)getIntent().getSerializableExtra("mBooksData");
-        mRv_newbooks.setAdapter(new mRvNewbooksAdapter(BooksShowActivity.this,mBooksData));
+        mBooksInfo=(ArrayList<BooksInfoCourse>)getIntent().getSerializableExtra("mBooksInfo");
+        mRv_newbooks.setAdapter(new mRvBooksInfoAdapter(BooksInfoActivity.this,mBooksInfo));
     }
-
-
 }

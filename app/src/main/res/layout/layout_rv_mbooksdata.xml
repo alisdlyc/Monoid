@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/rv_newbooks_image"
+        android:id="@+id/rv_mbooksdata_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/bj_2"
@@ -14,12 +14,12 @@
     </ImageView>
 
     <LinearLayout
-        android:layout_toRightOf="@id/rv_newbooks_image"
+        android:layout_toRightOf="@id/rv_mbooksdata_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/rv_newbooks_title"
+            android:id="@+id/rv_mbooksdata_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -31,7 +31,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/rv_newbooks_writer"
+            android:id="@+id/rv_mbooksdata_writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -41,7 +41,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/rv_newbooks_ISBN"
+            android:id="@+id/rv_mbooksdata_ISBN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

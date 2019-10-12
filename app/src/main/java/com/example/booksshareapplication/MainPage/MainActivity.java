@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public class GetBooksInfo extends Thread{
+    private class GetBooksInfo extends Thread{
         @Override
         public void run() {
             super.run();
