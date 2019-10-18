@@ -1,4 +1,4 @@
-package com.example.booksshareapplication.MainPage.MyFragment;
+package com.example.booksshareapplication.unused;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,11 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class MyTabBorrowFragment extends Fragment {
+public class MyTabCommentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.tab_frag_borrow,container,false);
+        View view=inflater.inflate(R.layout.tab_frag_comment,container,false);
         return view;
     }
 }

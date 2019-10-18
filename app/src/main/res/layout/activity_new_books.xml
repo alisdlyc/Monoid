@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NewBooks.BooksShowActivity">
+    tools:context=".BooksSearch_First.BooksShowActivity">
 
     <ImageView
         android:layout_width="match_parent"

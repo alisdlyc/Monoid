@@ -1,4 +1,4 @@
-package com.example.booksshareapplication.NewBooks;
+package com.example.booksshareapplication.BooksSearch_Sec;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,19 +20,18 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class mRvBooksInfoAdapter extends RecyclerView.Adapter<mRvBooksInfoAdapter.LinearViewHolder> {
+public class mBooksInfoAdapter extends RecyclerView.Adapter<mBooksInfoAdapter.LinearViewHolder> {
     private Context mContext;
     public ArrayList<BooksInfoCourse> mBooksInfo;
 
-    public mRvBooksInfoAdapter(Context context, ArrayList<BooksInfoCourse> mBooksInfo){
+    public mBooksInfoAdapter(Context context, ArrayList<BooksInfoCourse> mBooksInfo){
         this.mContext=context;
         this.mBooksInfo=mBooksInfo;
-//        this.mBooksInfo=m
     }
 
     @NonNull
     @Override
-    public mRvBooksInfoAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public mBooksInfoAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //传入需要的布局文件
        return new LinearViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_rv_mbooksinfo,parent,false));
     }
@@ -40,21 +39,16 @@ public class mRvBooksInfoAdapter extends RecyclerView.Adapter<mRvBooksInfoAdapte
     @Override
     public void onBindViewHolder(@NonNull LinearViewHolder holder, final int position) {
     //修改RecycleView布局文件中的控件
-
-//        private TextView mTvBookName,mTvindexNumber,mTvWriter,mTvWriterInfo,mTvPress
-//                ,mTvPressingYear,mTvBorrowingTimes,mTvStatus,mTvDepartment,mTvFloor
-//                ,mTvArea,mTvShelf,mTvShelfFloor,mTvDefaultComment,mTvStar;
         //修改布局文件控件的值来输出所有的书籍
         //根据positon的不同，来填入不同的书籍
         holder.mIv_BookImage.setImageResource(R.mipmap.bj_4);
-
         holder.mTvBookName.setText(mBooksInfo.get(position).BookName);
         holder.mTvindexNumber.setText(mBooksInfo.get(position).IndexNumber);
         holder.mTvWriter.setText(mBooksInfo.get(position).Writer);
         holder.mTvWriterInfo.setText(mBooksInfo.get(position).WriterInfo);
         holder.mTvPress.setText(mBooksInfo.get(position).Press);
         holder.mTvPressingYear.setText(mBooksInfo.get(position).PressingYear);
-        holder.mTvBorrowingTimes.setText(mBooksInfo.get(position).BorringTimes);
+        holder.mTvBorrowingTimes.setText("当前已被借阅"+mBooksInfo.get(position).BorringTimes+"次");
         holder.mTvStatus.setText(mBooksInfo.get(position).Status);
         holder.mTvDepartment.setText(mBooksInfo.get(position).Department);
         holder.mTvFloor.setText(mBooksInfo.get(position).Floor);

@@ -27,13 +27,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".BlueTooth.BlueToothActivity" />
-        <activity android:name=".Label.LabelActivity" />
-        <activity android:name=".NewBooks.BooksShowActivity" />
-        <activity android:name=".NewBooks.BooksInfoActivity"/>
+        <activity android:name=".unused.BlueTooth.BlueToothActivity" />
+        <activity android:name=".unused.Label.LabelActivity" />
+        <activity android:name=".BooksSearch_First.BooksShowActivity" />
+        <activity android:name=".BooksSearch_Sec.BooksInfoActivity"/>
 
         <activity
-            android:name=".MainPage.MainActivity"
+            android:name=".MainPage.MainSearchActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar">
         </activity>
     </application>

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center">
+    android:gravity="center"
+    >
 
     <ImageView
         android:layout_gravity="center"
@@ -31,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
         android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
+        android:text="北方栖姬当前存活"
+        android:textColor="@color/word_first">
     </TextView>
 
     <TextView
@@ -41,8 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
         android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
+        android:text="北方栖姬被借出10086次"
+        android:textColor="@color/word_first">
     </TextView>
 
     <TextView
@@ -51,39 +52,62 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
         android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
+        android:text="沙河or本部"
+        android:textColor="@color/word_first">
     </TextView>
 
-    <TextView
-        android:id="@+id/rv_booksinfo_Floor"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
-    </TextView>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/rv_booksinfo_Area"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
-    </TextView>
+        <TextView
+            android:id="@+id/rv_booksinfo_ShelfFloor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:textSize="14sp"
+            android:text="架位所在层"
+            android:textColor="@color/word_sec">
+        </TextView>
 
-    <TextView
-        android:id="@+id/rv_booksinfo_Shelf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
-    </TextView>
+        <TextView
+            android:layout_toRightOf="@+id/rv_booksinfo_ShelfFloor"
+            android:paddingLeft="10dp"
+            android:id="@+id/rv_booksinfo_Floor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:textSize="14sp"
+            android:text="是书架号"
+            android:textColor="@color/word_sec">
+        </TextView>
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/rv_booksinfo_Floor"
+            android:id="@+id/rv_booksinfo_Area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:textSize="14sp"
+            android:text="区域好像"
+            android:textColor="@color/word_sec">
+        </TextView>
+
+        <TextView
+            android:layout_toRightOf="@id/rv_booksinfo_Area"
+            android:paddingLeft="15dp"
+            android:id="@+id/rv_booksinfo_Shelf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:textSize="14sp"
+            android:text="是书架号"
+            android:textColor="@color/word_sec">
+        </TextView>
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/rv_booksinfo_indexNumber"
@@ -91,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
         android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
+        android:text="索书号还是别的什么"
         android:textColor="@color/word_third">
     </TextView>
 
@@ -101,51 +125,53 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
         android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
+        android:text="作者：北方栖姬"
         android:textColor="@color/word_third">
     </TextView>
 
     <TextView
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:id="@+id/rv_booksinfo_WriterInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
         android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
+        android:text="是北酱的详细信息"
         android:textColor="@color/word_third">
     </TextView>
 
-    <TextView
-        android:id="@+id/rv_booksinfo_Press"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
-    </TextView>
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/rv_booksinfo_Press"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:textSize="14sp"
+            android:text="北酱出版社"
+            android:textColor="@color/word_third">
+        </TextView>
+
+        <TextView
+            android:layout_toRightOf="@+id/rv_booksinfo_Press"
+            android:paddingLeft="15dp"
+            android:id="@+id/rv_booksinfo_PressingYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:textSize="14sp"
+            android:text="2333年"
+            android:textColor="@color/word_third">
+        </TextView>
+
+    </RelativeLayout>
+
 
     <TextView
-        android:id="@+id/rv_booksinfo_PressingYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
-    </TextView>
-
-    <TextView
-        android:id="@+id/rv_booksinfo_ShelfFloor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:textSize="14sp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third">
-    </TextView>
-
-    <TextView
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
         android:id="@+id/rv_booksinfo_DefaultComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

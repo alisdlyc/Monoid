@@ -1,6 +1,5 @@
 package com.example.booksshareapplication.MainPage.MyFragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,8 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.booksshareapplication.MainPage.FirstSeeActivity;
-import com.example.booksshareapplication.MainPage.MainActivity;
+import com.example.booksshareapplication.MainPage.MainSearchActivity;
 import com.example.booksshareapplication.R;
 
 import java.io.IOException;
@@ -21,7 +19,6 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
 import androidx.fragment.app.Fragment;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -101,7 +98,7 @@ public class MySubmitFragment extends Fragment {
                         case 1:
                             //成功登录之后记录登录信息，在下次打开App的时候直接跳转到搜索界面
                             editor.putBoolean("LoginSuccess",true).apply();
-                            Intent intent=new Intent(getActivity(), MainActivity.class);
+                            Intent intent=new Intent(getActivity(), MainSearchActivity.class);
                             startActivity(intent);
                             Toast.makeText(getContext(),"成功登录",Toast.LENGTH_SHORT).show();
                             break;

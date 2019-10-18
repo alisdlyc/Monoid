@@ -1,11 +1,10 @@
-package com.example.booksshareapplication.NewBooks;
+package com.example.booksshareapplication.BooksSearch_Sec;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.BooksInfoCourse;
-import com.example.booksshareapplication.Util.Course;
 
 import java.util.ArrayList;
 
@@ -27,9 +26,8 @@ public class BooksInfoActivity extends AppCompatActivity {
         mRv_newbooks.setLayoutManager(new LinearLayoutManager(BooksInfoActivity.this));
         //创建intent对象用于接收数据
         intent=getIntent();
-//        mBooksData=(ArrayList<Course>)intent.getSerializableExtra("mBooksData");
         //接受intent传入的书籍
         mBooksInfo=(ArrayList<BooksInfoCourse>)getIntent().getSerializableExtra("mBooksInfo");
-        mRv_newbooks.setAdapter(new mRvBooksInfoAdapter(BooksInfoActivity.this,mBooksInfo));
+        mRv_newbooks.setAdapter(new mBooksInfoAdapter(BooksInfoActivity.this,mBooksInfo));
     }
 }

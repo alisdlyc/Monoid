@@ -1,4 +1,4 @@
-package com.example.booksshareapplication.NewBooks;
+package com.example.booksshareapplication.BooksSearch_First;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,11 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.Course;
@@ -31,10 +26,9 @@ public class BooksShowActivity extends AppCompatActivity {
         mRv_newbooks.setLayoutManager(new LinearLayoutManager(BooksShowActivity.this));
         //创建intent对象用于接收数据
         intent=getIntent();
-//        mBooksData=(ArrayList<Course>)intent.getSerializableExtra("mBooksData");
         //接受intent传入的书籍
         mBooksData=(ArrayList<Course>)getIntent().getSerializableExtra("mBooksData");
-        mRv_newbooks.setAdapter(new mRvNewbooksAdapter(BooksShowActivity.this,mBooksData));
+        mRv_newbooks.setAdapter(new mBooksShowAdapter(BooksShowActivity.this,mBooksData));
     }
 
 

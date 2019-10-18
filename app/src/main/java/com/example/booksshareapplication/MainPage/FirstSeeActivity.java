@@ -1,15 +1,10 @@
 package com.example.booksshareapplication.MainPage;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.booksshareapplication.MainPage.MyFragment.MyRegisterFragment;
@@ -45,7 +40,7 @@ public class FirstSeeActivity extends AppCompatActivity {
             }
         }else{
             //该账号已经成功登录,跳转到搜索页面
-            Intent intent=new Intent(FirstSeeActivity.this,MainActivity.class);
+            Intent intent=new Intent(FirstSeeActivity.this, MainSearchActivity.class);
             startActivity(intent);
         }
 

@@ -6,12 +6,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -21,7 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.example.booksshareapplication.NewBooks.BooksShowActivity;
+import com.example.booksshareapplication.BooksSearch_First.BooksShowActivity;
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.Course;
 import com.google.android.material.navigation.NavigationView;
@@ -34,24 +31,24 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainSearchActivity extends AppCompatActivity implements View.OnTouchListener {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     public View view;
     private float PosX,curPosX;
     private EditText mEditText;
 
-    public MotionEvent mEvent;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
     public ArrayList<Course> mBooksData;
     private ImageView mSearchIcon;
-    private ImageView LoadingBooks;
+    private ImageView mBooksOrMagazine;
 
     public String mSearchContext;
     private Toast mToast;
     private DrawerLayout mDrawlayout;
+    private boolean books_search=true;
 
 
     @Override
@@ -68,12 +65,28 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         mEditText=findViewById(R.id.books_search_text);
         mSearchIcon=findViewById(R.id.books_search_icon);
-        LoadingBooks=findViewById(R.id.Loading_books);
 
         mDrawerLayout=findViewById(R.id.draw_main);
         mDrawerLayout.setOnTouchListener(this);
 
 
+        //可根据books_search的值来判断查询的数据库
+        mBooksOrMagazine=findViewById(R.id.mIv_IsSearchBooks);
+        mBooksOrMagazine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //之前为true，当点击图标时，搜索的为期刊，更换图片，改变books_search的值
+                if(books_search=true)
+                {
+                    mBooksOrMagazine.setImageResource(R.mipmap.search_for_magazine);
+                    books_search=false;
+                }else {
+                    mBooksOrMagazine.setImageResource(R.mipmap.search_for_books);
+                    books_search=true;
+                }
+
+            }
+        });
 
 //        if(onTouchEvent(mEvent))
 //            mDrawerLayout.openDrawer(Gravity.LEFT);
@@ -97,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 if(keyCode==KeyEvent.KEYCODE_ENTER){
                     //隐藏键盘
                     ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE))
-                            .hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                            .hideSoftInputFromWindow(MainSearchActivity.this.getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
                     //进行search
                     try {
                         search();
@@ -119,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }else {
 
             if(mToast==null){
-                mToast=Toast.makeText(MainActivity.this,"查询中...",Toast.LENGTH_LONG);
+                mToast=Toast.makeText(MainSearchActivity.this,"查询中...",Toast.LENGTH_LONG);
             }else {
                 //用户频繁点击查询按钮
                 mToast.setText("查询中");
@@ -184,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 //将返回的response数据标准json格式化
                 mBooksData=function(mJson);
 
-                Intent intent=new Intent(MainActivity.this, BooksShowActivity.class);
+                Intent intent=new Intent(MainSearchActivity.this, BooksShowActivity.class);
                 intent.putExtra("mBooksData",(Serializable) mBooksData);
                 startActivity(intent);
 
@@ -206,21 +219,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         for (int i = 0; i < Books.length(); i++) {
             Course temp = new Course();
             JSONObject jsonObject = Books.getJSONObject(i);
-//            temp.Area = jsonObject.getString("Area");
             temp.BookName = jsonObject.getString("BookName");
-//            temp.IndexNumber = jsonObject.getString("indexNumber");
-//            temp.Writer = jsonObject.getString("Writer");
-//            temp.WriterInfo = jsonObject.getString("WriterInfo");
             temp.Press = jsonObject.getString("Press");
             temp.PressingYear = jsonObject.getString("PressingYear");
-//            temp.BorringTimes = jsonObject.getString("BorrowingTimes");
-//            temp.Department = jsonObject.getString("Department");
-//            temp.Status = jsonObject.getString("Status");
-//            temp.Floor = jsonObject.getString("Floor");
-//            temp.Shelf = jsonObject.getString("Shelf");
-//            temp.ShelfFloor = jsonObject.getString("ShelfFloor");
-//            temp.DefaultComment = jsonObject.getString("DefaultComment");
-//            temp.Star = jsonObject.getString("Star");
             temp.html=jsonObject.getString("html");
 
             data.add(temp);

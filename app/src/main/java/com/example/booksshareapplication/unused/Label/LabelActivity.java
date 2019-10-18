@@ -1,4 +1,4 @@
-package com.example.booksshareapplication.BlueTooth;
+package com.example.booksshareapplication.unused.Label;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,28 +6,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
 
-import com.example.booksshareapplication.Label.LabelActivity;
-import com.example.booksshareapplication.MainPage.MainActivity;
-import com.example.booksshareapplication.NewBooks.BooksShowActivity;
+import com.example.booksshareapplication.unused.BlueTooth.BlueToothActivity;
+import com.example.booksshareapplication.MainPage.MainSearchActivity;
+import com.example.booksshareapplication.BooksSearch_First.BooksShowActivity;
 import com.example.booksshareapplication.R;
 
-public class BlueToothActivity extends AppCompatActivity {
+public class LabelActivity extends AppCompatActivity {
 
-    private SearchView qwq;
     private Button mBtn_mainpage,mBtn_label,mBtn_bluetooth,mBtn_newbooks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blue_tooth);
+        setContentView(R.layout.activity_lable);
 
         mBtn_mainpage=findViewById(R.id.home_bot_mainpage);
         mBtn_mainpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //跳转到mainpage演示界面
-                Intent intent=new Intent(BlueToothActivity.this, MainActivity.class);
+                Intent intent=new Intent(LabelActivity.this, MainSearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +35,7 @@ public class BlueToothActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //跳转到label演示界面
-                Intent intent=new Intent(BlueToothActivity.this, LabelActivity.class);
+                Intent intent=new Intent(LabelActivity.this, LabelActivity.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +45,7 @@ public class BlueToothActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //跳转到bluetooth演示界面
-                Intent intent=new Intent(BlueToothActivity.this, BlueToothActivity.class);
+                Intent intent=new Intent(LabelActivity.this, BlueToothActivity.class);
 //                startActivity(intent);
             }
         });
@@ -57,7 +55,7 @@ public class BlueToothActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //跳转到newbooks演示界面
-                Intent intent=new Intent(BlueToothActivity.this, BooksShowActivity.class);
+                Intent intent=new Intent(LabelActivity.this, BooksShowActivity.class);
                 startActivity(intent);
             }
         });

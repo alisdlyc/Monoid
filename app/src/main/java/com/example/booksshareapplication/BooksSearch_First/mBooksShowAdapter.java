@@ -1,4 +1,4 @@
-package com.example.booksshareapplication.NewBooks;
+package com.example.booksshareapplication.BooksSearch_First;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.booksshareapplication.BooksSearch_Sec.BooksInfoActivity;
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.BooksInfoCourse;
 import com.example.booksshareapplication.Util.Course;
@@ -25,25 +27,25 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class mRvNewbooksAdapter extends RecyclerView.Adapter<mRvNewbooksAdapter.LinearViewHolder> {
+public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.LinearViewHolder> {
     private Context mContext;
     private ArrayList<Course> BooksData;
     public ArrayList<BooksInfoCourse> mBooksInfo;
     public int mPosition;
-    public mRvNewbooksAdapter(Context context,ArrayList<Course> mBooksData){
+    public mBooksShowAdapter(Context context, ArrayList<Course> mBooksData){
         this.mContext=context;
         this.BooksData =mBooksData;
     }
 
     @NonNull
     @Override
-    public mRvNewbooksAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public mBooksShowAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //传入需要的布局文件,当前应为layout_rv_mbooksdata
        return new LinearViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_rv_mbooksdata,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull mRvNewbooksAdapter.LinearViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull mBooksShowAdapter.LinearViewHolder holder, final int position) {
     //修改RecycleView布局文件中的控件
 
         //修改布局文件控件的值来输出所有的书籍
