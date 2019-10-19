@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BooksShareApplication</string>
+    <string name="app_name">Monoid</string>
     <string name="search">请输入要查询的书籍名称</string>
     <string name="action_settings">action settings dont</string>
     <string name="title_activity_login">Sign in</string>
