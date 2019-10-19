@@ -31,7 +31,7 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
     private Context mContext;
     private ArrayList<Course> BooksData;
     public ArrayList<BooksInfoCourse> mBooksInfo;
-    public int mPosition;
+
     public mBooksShowAdapter(Context context, ArrayList<Course> mBooksData){
         this.mContext=context;
         this.BooksData =mBooksData;
@@ -61,12 +61,12 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
 
                 new Thread(new Runnable() {
                     @Override
-                    public void run() {
+                    public void run() {p
                         OkHttpClient client = new OkHttpClient();
 
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("PostId", "6")
-                                .add("Keyword", BooksData.get(mPosition).html.toString())
+                                .add("Keyword", BooksData.get(osition).html.toString())
                                 .build();
 
                         Request request = new Request.Builder()

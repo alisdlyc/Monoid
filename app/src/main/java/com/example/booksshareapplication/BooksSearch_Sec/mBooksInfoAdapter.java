@@ -58,45 +58,45 @@ public class mBooksInfoAdapter extends RecyclerView.Adapter<mBooksInfoAdapter.Li
         holder.mTvDefaultComment.setText(mBooksInfo.get(position).DefaultComment);
         holder.mTvStar.setText(mBooksInfo.get(position).Star);
 
-        //设置点击事件
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"BooksName"+ mBooksInfo.get(position).html,Toast.LENGTH_LONG).show();
-            }
-        });
+//        //设置点击事件
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext,"BooksName"+ mBooksInfo.get(position).html,Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
-    public ArrayList<BooksInfoCourse> function(String json) throws JSONException {
-        JSONObject obj = new JSONObject(json);
-        JSONArray Books = obj.getJSONArray("Books");
-
-        ArrayList<BooksInfoCourse> data = new ArrayList<>();
-
-        for (int i = 0; i < Books.length(); i++) {
-            BooksInfoCourse temp = new BooksInfoCourse();
-            JSONObject jsonObject = Books.getJSONObject(i);
-            temp.Area = jsonObject.getString("Area");
-            temp.BookName = jsonObject.getString("BookName");
-            temp.IndexNumber = jsonObject.getString("indexNumber");
-            temp.Writer = jsonObject.getString("Writer");
-            temp.WriterInfo = jsonObject.getString("WriterInfo");
-            temp.Press = jsonObject.getString("Press");
-            temp.PressingYear = jsonObject.getString("PressingYear");
-            temp.BorringTimes = jsonObject.getString("BorrowingTimes");
-            temp.Department = jsonObject.getString("Department");
-            temp.Status = jsonObject.getString("Status");
-            temp.Floor = jsonObject.getString("Floor");
-            temp.Shelf = jsonObject.getString("Shelf");
-            temp.ShelfFloor = jsonObject.getString("ShelfFloor");
-            temp.DefaultComment = jsonObject.getString("DefaultComment");
-            temp.Star = jsonObject.getString("Star");
-            temp.html=jsonObject.getString("html");
-            data.add(temp);
-        }
-
-        return data;
-    }
+//    public ArrayList<BooksInfoCourse> function(String json) throws JSONException {
+//        JSONObject obj = new JSONObject(json);
+//        JSONArray Books = obj.getJSONArray("Books");
+//
+//        ArrayList<BooksInfoCourse> data = new ArrayList<>();
+//
+//        for (int i = 0; i < Books.length(); i++) {
+//            BooksInfoCourse temp = new BooksInfoCourse();
+//            JSONObject jsonObject = Books.getJSONObject(i);
+//            temp.Area = jsonObject.getString("Area");
+//            temp.BookName = jsonObject.getString("BookName");
+//            temp.IndexNumber = jsonObject.getString("indexNumber");
+//            temp.Writer = jsonObject.getString("Writer");
+//            temp.WriterInfo = jsonObject.getString("WriterInfo");
+//            temp.Press = jsonObject.getString("Press");
+//            temp.PressingYear = jsonObject.getString("PressingYear");
+//            temp.BorringTimes = jsonObject.getString("BorrowingTimes");
+//            temp.Department = jsonObject.getString("Department");
+//            temp.Status = jsonObject.getString("Status");
+//            temp.Floor = jsonObject.getString("Floor");
+//            temp.Shelf = jsonObject.getString("Shelf");
+//            temp.ShelfFloor = jsonObject.getString("ShelfFloor");
+//            temp.DefaultComment = jsonObject.getString("DefaultComment");
+//            temp.Star = jsonObject.getString("Star");
+//            temp.html=jsonObject.getString("html");
+//            data.add(temp);
+//        }
+//
+//        return data;
+//    }
 
 
     @Override
