@@ -59,6 +59,7 @@ public class mBooksInfoAdapter extends RecyclerView.Adapter<mBooksInfoAdapter.Li
             holder.mTvPress.setText(mBooksInfo.get(position).Press);
             holder.mTvPressingYear.setText(mBooksInfo.get(position).PressingYear);
             holder.mTvDefaultComment.setText(mBooksInfo.get(position).DefaultComment);
+            holder.mTvStar.setVisibility(View.GONE);
         } else {
             holder.mTvWriter.setVisibility(View.GONE);
             holder.mTvBookName.setVisibility(View.GONE);
