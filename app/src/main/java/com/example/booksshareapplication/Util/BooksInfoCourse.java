@@ -11,14 +11,11 @@ public class BooksInfoCourse implements Serializable {
     public String Press;        //出版社
     public String PressingYear; //出版时间
     public String BorringTimes;    //借阅次数
-
     public String Department;   //沙河or本部
     public String Status;       //当前借阅状态
-    public String Floor;        //第几层
     public String Area;
-    public String Shelf;
-    public String ShelfFloor;
     public String DefaultComment;//书籍简介
     public String Star;
-    public String html;//用于对图书详情页的检索
+    public String html;         //用于对图书详情页的检索
+
 }

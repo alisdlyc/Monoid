@@ -1,4 +1,5 @@
 package com.example.booksshareapplication.BooksSearch_First;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,13 +13,16 @@ import com.example.booksshareapplication.BooksSearch_Sec.BooksInfoActivity;
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.BooksInfoCourse;
 import com.example.booksshareapplication.Util.Course;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.FormBody;
@@ -32,21 +36,21 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
     private ArrayList<Course> BooksData;
     public ArrayList<BooksInfoCourse> mBooksInfo;
 
-    public mBooksShowAdapter(Context context, ArrayList<Course> mBooksData){
-        this.mContext=context;
-        this.BooksData =mBooksData;
+    public mBooksShowAdapter(Context context, ArrayList<Course> mBooksData) {
+        this.mContext = context;
+        this.BooksData = mBooksData;
     }
 
     @NonNull
     @Override
     public mBooksShowAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //传入需要的布局文件,当前应为layout_rv_mbooksdata
-       return new LinearViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_rv_mbooksdata,parent,false));
+        return new LinearViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_rv_mbooksdata, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull mBooksShowAdapter.LinearViewHolder holder, final int position) {
-    //修改RecycleView布局文件中的控件
+        //修改RecycleView布局文件中的控件
 
         //修改布局文件控件的值来输出所有的书籍
         //根据positon的不同，来填入不同的书籍
@@ -57,7 +61,7 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"BooksName"+ BooksData.get(position).html,Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "BooksName" + BooksData.get(position).html, Toast.LENGTH_LONG).show();
 
                 new Thread(new Runnable() {
                     @Override
@@ -79,16 +83,16 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
                             Response response = client.newCall(request).execute();
 
                             String mJson = Objects.requireNonNull(response.body()).string()
-                                    .replace("\\","")
-                                    .replace("\"[","[")
-                                    .replace("]\"","]");
+                                    .replace("\\", "")
+                                    .replace("\"[", "[")
+                                    .replace("]\"", "]");
                             //将返回的response数据标准json格式化
 
-                            mBooksInfo =function(mJson);
+                            mBooksInfo = function(mJson);
 
                             //将图书详情发送到BookInfoActivity中
-                            Intent intent=new Intent(mContext, BooksInfoActivity.class);
-                            intent.putExtra("mBooksInfo",(Serializable) mBooksInfo);
+                            Intent intent = new Intent(mContext, BooksInfoActivity.class);
+                            intent.putExtra("mBooksInfo", (Serializable) mBooksInfo);
                             mContext.startActivity(intent);
 
                         } catch (IOException | JSONException e) {
@@ -120,9 +124,6 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
             temp.BorringTimes = jsonObject.getString("BorrowingTimes");
             temp.Department = jsonObject.getString("Department");
             temp.Status = jsonObject.getString("Status");
-            temp.Floor = jsonObject.getString("Floor");
-            temp.Shelf = jsonObject.getString("Shelf");
-            temp.ShelfFloor = jsonObject.getString("ShelfFloor");
             temp.DefaultComment = jsonObject.getString("DefaultComment");
             temp.Star = jsonObject.getString("Star");
             data.add(temp);
@@ -139,21 +140,22 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
         return BooksData.size();
     }
 
-    class LinearViewHolder extends RecyclerView.ViewHolder{
+    class LinearViewHolder extends RecyclerView.ViewHolder {
         private ImageView mIv_BookImage;
-        private TextView mTv_BookTitle,mTv_BookWriter,mTv_BookISBN;
+        private TextView mTv_BookTitle, mTv_BookWriter, mTv_BookISBN;
 
-        public LinearViewHolder (View itemView){
+        public LinearViewHolder(View itemView) {
             super(itemView);
-            mIv_BookImage=itemView.findViewById(R.id.rv_mbooksdata_image);
+            mIv_BookImage = itemView.findViewById(R.id.rv_mbooksdata_image);
             //找到控件所在的id位置
-            mTv_BookTitle=itemView.findViewById(R.id.rv_mbooksdata_title);
-            mTv_BookWriter=itemView.findViewById(R.id.rv_mbooksdata_writer);
-            mTv_BookISBN=itemView.findViewById(R.id.rv_mbooksdata_ISBN);
+            mTv_BookTitle = itemView.findViewById(R.id.rv_mbooksdata_title);
+            mTv_BookWriter = itemView.findViewById(R.id.rv_mbooksdata_writer);
+            mTv_BookISBN = itemView.findViewById(R.id.rv_mbooksdata_ISBN);
 
         }
     }
-    public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         void onClick(int pos);
     }
 

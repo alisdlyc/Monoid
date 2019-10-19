@@ -1,4 +1,5 @@
 package com.example.booksshareapplication.MainPage;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import okhttp3.FormBody;
@@ -6,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,13 +20,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.example.booksshareapplication.BooksSearch_First.BooksShowActivity;
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.Course;
 import com.google.android.material.navigation.NavigationView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,7 +40,7 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     public View view;
-    private float PosX,curPosX;
+    private float PosX, curPosX;
     private EditText mEditText;
 
     private SharedPreferences mSharedPreferences;
@@ -48,7 +53,7 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
     public String mSearchContext;
     private Toast mToast;
     private DrawerLayout mDrawlayout;
-    private boolean books_search=true;
+    public boolean books_search = true;
 
 
     @Override
@@ -56,33 +61,33 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSharedPreferences=getSharedPreferences("BooksData",MODE_PRIVATE);
-        mEditor=mSharedPreferences.edit();
+        mSharedPreferences = getSharedPreferences("BooksData", MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
 
         mNavigationView = findViewById(R.id.home_left_Ngv);
         mDrawerLayout = findViewById(R.id.draw_main);
         mNavigationView.setItemIconTintList(null);
 
-        mEditText=findViewById(R.id.books_search_text);
-        mSearchIcon=findViewById(R.id.books_search_icon);
+        mEditText = findViewById(R.id.books_search_text);
+        mSearchIcon = findViewById(R.id.books_search_icon);
 
-        mDrawerLayout=findViewById(R.id.draw_main);
+        mDrawerLayout = findViewById(R.id.draw_main);
         mDrawerLayout.setOnTouchListener(this);
 
 
         //可根据books_search的值来判断查询的数据库
-        mBooksOrMagazine=findViewById(R.id.mIv_IsSearchBooks);
+        mBooksOrMagazine = findViewById(R.id.mIv_IsSearchBooks);
         mBooksOrMagazine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //之前为true，当点击图标时，搜索的为期刊，更换图片，改变books_search的值
-                if(books_search=true)
-                {
+                if (books_search == true) {
                     mBooksOrMagazine.setImageResource(R.mipmap.search_for_magazine);
-                    books_search=false;
-                }else {
+                    books_search = false;
+                } else {
                     mBooksOrMagazine.setImageResource(R.mipmap.search_for_books);
-                    books_search=true;
+                    books_search = true;
                 }
 
             }
@@ -107,10 +112,10 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
         mEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode==KeyEvent.KEYCODE_ENTER){
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     //隐藏键盘
-                    ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE))
-                            .hideSoftInputFromWindow(MainSearchActivity.this.getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                    ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(MainSearchActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     //进行search
                     try {
                         search();
@@ -126,14 +131,14 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
 
     private void search() throws IOException {
 
-        mSearchContext=mEditText.getText().toString().trim();
-        if(TextUtils.isEmpty(mSearchContext)){
+        mSearchContext = mEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(mSearchContext)) {
             //输入为空
-        }else {
+        } else {
 
-            if(mToast==null){
-                mToast=Toast.makeText(MainSearchActivity.this,"查询中...",Toast.LENGTH_LONG);
-            }else {
+            if (mToast == null) {
+                mToast = Toast.makeText(MainSearchActivity.this, "查询中...", Toast.LENGTH_LONG);
+            } else {
                 //用户频繁点击查询按钮
                 mToast.setText("查询中");
             }
@@ -145,15 +150,15 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if(event.getAction()==MotionEvent.ACTION_DOWN){
-            PosX=event.getX();
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            PosX = event.getX();
         }
 
-        if (event.getAction()==MotionEvent.ACTION_UP){
-            curPosX=event.getX();
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            curPosX = event.getX();
         }
 
-        if(curPosX-PosX>350){
+        if (curPosX - PosX > 350) {
             mDrawerLayout.openDrawer(Gravity.LEFT);
         }
         return false;
@@ -164,7 +169,7 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
 
     }
 
-    private class GetBooksInfo extends Thread{
+    private class GetBooksInfo extends Thread {
         @Override
         public void run() {
             super.run();
@@ -191,14 +196,14 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
             }
             try {
                 String mJson = Objects.requireNonNull(response.body()).string()
-                        .replace("\\","")
-                        .replace("\"[","[")
-                        .replace("]\"","]");
+                        .replace("\\", "")
+                        .replace("\"[", "[")
+                        .replace("]\"", "]");
                 //将返回的response数据标准json格式化
-                mBooksData=function(mJson);
+                mBooksData = function(mJson);
 
-                Intent intent=new Intent(MainSearchActivity.this, BooksShowActivity.class);
-                intent.putExtra("mBooksData",(Serializable) mBooksData);
+                Intent intent = new Intent(MainSearchActivity.this, BooksShowActivity.class);
+                intent.putExtra("mBooksData", (Serializable) mBooksData);
                 startActivity(intent);
 
             } catch (IOException | JSONException e) {
@@ -222,7 +227,7 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
             temp.BookName = jsonObject.getString("BookName");
             temp.Press = jsonObject.getString("Press");
             temp.PressingYear = jsonObject.getString("PressingYear");
-            temp.html=jsonObject.getString("html");
+            temp.html = jsonObject.getString("html");
 
             data.add(temp);
         }
