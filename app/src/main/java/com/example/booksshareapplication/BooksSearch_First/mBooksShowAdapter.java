@@ -61,12 +61,12 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
 
                 new Thread(new Runnable() {
                     @Override
-                    public void run() {p
+                    public void run() {
                         OkHttpClient client = new OkHttpClient();
 
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("PostId", "6")
-                                .add("Keyword", BooksData.get(osition).html.toString())
+                                .add("Keyword", BooksData.get(position).html.toString())
                                 .build();
 
                         Request request = new Request.Builder()
