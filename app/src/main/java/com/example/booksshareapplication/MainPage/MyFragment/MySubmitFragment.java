@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.booksshareapplication.MainPage.MainSearchActivity;
@@ -34,6 +35,8 @@ public class MySubmitFragment extends Fragment {
     public SharedPreferences sharedPreferences;
     public SharedPreferences.Editor editor;
     public int IsLogin=0;
+    private TextView mTvHaveNoAccount;
+    private MyRegisterFragment mRgfragment;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +59,15 @@ public class MySubmitFragment extends Fragment {
         //如果以及成功注册则从本地读取数据
         sharedPreferences= Objects.requireNonNull(getActivity()).getSharedPreferences("BooksData",MODE_PRIVATE);
         editor=sharedPreferences.edit();
+        mTvHaveNoAccount=view.findViewById(R.id.HaveNoAccount);
+        mTvHaveNoAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //当前暂无账号，跳转到注册页面
+                mRgfragment=new MyRegisterFragment();
+                Objects.requireNonNull(getFragmentManager()).beginTransaction().replace(R.id.fl_first_see,mRgfragment).commitAllowingStateLoss();
+            }
+        });
 
         if(sharedPreferences.getBoolean("IsRegister",false)){
             mEtStudentId_sm.setText(sharedPreferences.getString("STUDENTID",""));
@@ -78,7 +90,6 @@ public class MySubmitFragment extends Fragment {
                             .addHeader("Content-Type", "application/x-www-form-urlencoded")
                             .build();
 
-
                     Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -98,6 +109,13 @@ public class MySubmitFragment extends Fragment {
                         case 1:
                             //成功登录之后记录登录信息，在下次打开App的时候直接跳转到搜索界面
                             editor.putBoolean("LoginSuccess",true).apply();
+                            //如果当前账号不是在注册之后直接登录的，则记录当前账号的账号与密码，下次直接登录
+                            if(sharedPreferences.getBoolean("IsRegister",false)){
+                                editor.putString("STUDENTID",mEtStudentId_sm.getText().toString())
+                                        .putString("PASSWORD",mEtPassword_sm.getText().toString())
+                                        .putBoolean("IsRegister",true)
+                                        .apply();
+                            }
                             Intent intent=new Intent(getActivity(), MainSearchActivity.class);
                             startActivity(intent);
                             Toast.makeText(getContext(),"成功登录",Toast.LENGTH_SHORT).show();

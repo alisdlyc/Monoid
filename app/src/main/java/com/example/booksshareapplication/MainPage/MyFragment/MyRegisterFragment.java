@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.booksshareapplication.R;
@@ -39,6 +40,7 @@ public class MyRegisterFragment extends Fragment {
     private ImageView mSexImageView;
     private int IsMan=1;
     public int status;
+    private TextView mHaveAccount;
 
     @Nullable
     @Override
@@ -65,6 +67,17 @@ public class MyRegisterFragment extends Fragment {
         mEtDepartment_rs=view.findViewById(R.id.department_register);
         sharedPreferences= Objects.requireNonNull(getActivity()).getSharedPreferences("BooksData",MODE_PRIVATE);
         editor=sharedPreferences.edit();
+        mHaveAccount=view.findViewById(R.id.HaveAccount);
+        mHaveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //已经注册使用登录页替换注册页所在的位置
+                mSmFragment=new MySubmitFragment();
+                Objects.requireNonNull(getFragmentManager()).beginTransaction().replace(R.id.fl_first_see,mSmFragment).commitAllowingStateLoss();
+                editor.putBoolean("IsRegister",true)
+                        .apply();
+            }
+        });
 
         mSexImageView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -48,6 +48,16 @@
         android:src="@mipmap/login">
     </ImageView>
 
+    <TextView
+        android:id="@+id/HaveNoAccount"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="莫得账号，现在注册"
+        android:textColor="#429ac8">
+    </TextView>
+
 
 
 </LinearLayout>
