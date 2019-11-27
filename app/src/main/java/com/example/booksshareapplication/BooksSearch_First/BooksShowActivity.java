@@ -3,7 +3,13 @@ package com.example.booksshareapplication.BooksSearch_First;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -20,6 +26,13 @@ public class BooksShowActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ViewPump.init(ViewPump.builder()
+            .addInterceptor(new CalligraphyInterceptor(
+                    new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/PingFang.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()))
+            .build());
         setContentView(R.layout.activity_new_books);
 
         mRv_newbooks=findViewById(R.id.newbooks_center_rv);
@@ -31,5 +44,8 @@ public class BooksShowActivity extends AppCompatActivity {
         mRv_newbooks.setAdapter(new mBooksShowAdapter(BooksShowActivity.this,mBooksData));
     }
 
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 }
