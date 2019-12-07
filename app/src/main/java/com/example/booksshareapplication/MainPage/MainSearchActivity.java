@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.booksshareapplication.BooksSearch_First.BooksShowActivity;
@@ -55,11 +56,15 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
     private DrawerLayout mDrawlayout;
     public boolean books_search = true;
 
+    private TextView mBlueText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         mSharedPreferences = getSharedPreferences("BooksData", MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
@@ -126,6 +131,7 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
                 return false;
             }
         });
+
     }
 
 
@@ -228,7 +234,8 @@ public class MainSearchActivity extends AppCompatActivity implements View.OnTouc
             temp.Press = jsonObject.getString("Press");
             temp.PressingYear = jsonObject.getString("PressingYear");
             temp.html = jsonObject.getString("html");
-
+            temp.url=jsonObject.getString("url");
+            temp.tags=jsonObject.getString("tags");
             data.add(temp);
         }
 

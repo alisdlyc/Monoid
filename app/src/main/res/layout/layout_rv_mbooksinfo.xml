@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
@@ -7,149 +8,114 @@
 
     <ImageView
         android:id="@+id/rv_newbooks_image"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="19dp"
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="54dp"
+        android:layout_marginLeft="35dp"
         android:scaleType="fitCenter"
-        android:src="@mipmap/bj_2"></ImageView>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/rv_booksinfo_Department"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:text="沙河or本部"
-            android:textColor="@color/word_first"
-            android:textSize="14sp"></TextView>
-
-        <TextView
-            android:id="@+id/rv_booksinfo_Status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:layout_toRightOf="@+id/rv_booksinfo_Department"
-            android:paddingLeft="15dp"
-            android:text="北方栖姬当前存活"
-            android:textColor="@color/word_first"
-            android:textSize="14sp"></TextView>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/rv_booksinfo_Press"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:text="北酱出版社"
-            android:textColor="@color/word_third"
-            android:textSize="14sp"></TextView>
-
-        <TextView
-            android:id="@+id/rv_booksinfo_PressingYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:layout_toRightOf="@+id/rv_booksinfo_Press"
-            android:paddingLeft="15dp"
-            android:text="2333年"
-            android:textColor="@color/word_third"
-            android:textSize="14sp"></TextView>
-
-    </RelativeLayout>
+        android:src="@mipmap/bj_2">
+    </ImageView>
 
 
     <TextView
+        android:layout_toRightOf="@+id/rv_newbooks_image"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
         android:id="@+id/rv_booksinfo_BookName"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:singleLine="true"
-        android:text="北方栖姬选集"
-        android:textColor="#3389c6"
-        android:textSize="20sp"></TextView>
+
+        android:text="书名"
+        android:textColor="@color/w_title"
+        android:textSize="16sp">
+    </TextView>
 
     <TextView
-        android:id="@+id/rv_booksinfo_BorrowingTimes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="北方栖姬被借出10086次"
-        android:textColor="@color/word_first"
-        android:textSize="14sp"></TextView>
-
-
-    <TextView
-        android:id="@+id/rv_booksinfo_Area"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="书记所在架位"
-        android:textColor="@color/word_sec"
-        android:textSize="14sp"></TextView>
-
-    <TextView
-        android:id="@+id/rv_booksinfo_indexNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="索书号还是别的什么"
-        android:textColor="@color/word_third"
-        android:textSize="14sp"></TextView>
-
-    <TextView
+        android:layout_toRightOf="@id/rv_newbooks_image"
+        android:layout_marginLeft="20dp"
         android:id="@+id/rv_booksinfo_Writer"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="120dp"
         android:text="作者：北方栖姬"
+        android:maxLines="2"
         android:textColor="@color/word_third"
-        android:textSize="14sp"></TextView>
+        android:textSize="14sp">
+    </TextView>
 
     <TextView
-        android:id="@+id/rv_booksinfo_WriterInfo"
+        android:layout_toRightOf="@id/rv_newbooks_image"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/rv_booksinfo_Press"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:text="是北酱的详细信息"
+        android:layout_marginTop="160dp"
+        android:text="北酱出版社"
         android:textColor="@color/word_third"
-        android:textSize="14sp"></TextView>
+        android:textSize="14sp">
+    </TextView>
 
     <TextView
-        android:id="@+id/rv_booksinfo_DefaultComment"
+        android:id="@+id/rv_booksinfo_PressingYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
+        android:layout_marginTop="100dp"
+        android:layout_toRightOf="@id/rv_newbooks_image"
+        android:layout_marginLeft="20dp"
+        android:text="2333年"
         android:textColor="@color/word_third"
-        android:textSize="14sp"></TextView>
+        android:textSize="14sp">
+    </TextView>
 
-    <TextView
-        android:id="@+id/rv_booksinfo_Star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="北方栖姬/2019.1.1/中国邮电大学出版社"
-        android:textColor="@color/word_third"
-        android:textSize="14sp"></TextView>
+    <ImageView
+        android:id="@+id/fake_shelflocal"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@mipmap/rv_info_localinfo"
+        android:layout_marginTop="216dp"
+        android:layout_marginLeft="90dp"
+        android:scaleType="fitCenter">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/fake_star"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="213dp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/star_info_fake"
+        android:scaleType="fitCenter">
+    </ImageView>
 
     <View
         android:id="@+id/divided_bottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/rv_newbooks_image"
-        android:layout_marginTop="16dp"
-        android:background="#dddddd"></View>
+        android:layout_marginTop="90dp"
+        android:background="#e9e9e9">
+    </View>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/fake_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="简介"
+        android:textColor="@color/w_title"
+        android:textSize="18sp"
+        android:layout_marginTop="282dp"
+        android:layout_marginLeft="38dp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/rv_info_context"
+        android:paddingLeft="38dp"
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="312dp"
+        android:textSize="15sp"
+        android:text="啊我死了">
+    </TextView>
+
+</RelativeLayout>

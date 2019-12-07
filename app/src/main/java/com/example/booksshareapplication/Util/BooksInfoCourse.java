@@ -17,5 +17,6 @@ public class BooksInfoCourse implements Serializable {
     public String DefaultComment;//书籍简介
     public String Star;
     public String html;         //用于对图书详情页的检索
+    public String url;
 
 }

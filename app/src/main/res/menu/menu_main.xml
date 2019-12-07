@@ -34,11 +34,14 @@
             android:icon="@mipmap/bj_9"
             android:id="@+id/item_4">
         </item>
-
     </group>
-
-
-
-
+    <group
+        android:id="@+id/group_bluetooth">
+        <item
+            android:title="给你糖哇"
+            android:icon="@mipmap/bj_9"
+            android:id="@+id/item_bluetooth">
+        </item>
+    </group>
 
 </menu>

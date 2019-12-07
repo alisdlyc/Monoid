@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.BooksInfoCourse;
 
@@ -41,36 +42,43 @@ public class mBooksInfoAdapter extends RecyclerView.Adapter<mBooksInfoAdapter.Li
         //修改RecycleView布局文件中的控件
         //修改布局文件控件的值来输出所有的书籍
         //根据positon的不同，来填入不同的书籍
-        holder.mTvindexNumber.setText(mBooksInfo.get(position).IndexNumber);
-        holder.mTvBorrowingTimes.setText("当前已被借阅" + mBooksInfo.get(position).BorringTimes + "次");
-        holder.mTvStatus.setText(mBooksInfo.get(position).Status);
-        holder.mTvDepartment.setText(mBooksInfo.get(position).Department);
+//        holder.mTvindexNumber.setText(mBooksInfo.get(position).IndexNumber);
+//        holder.mTvBorrowingTimes.setText("当前已被借阅" + mBooksInfo.get(position).BorringTimes + "次");
+
+//        holder.mTvDepartment.setText(mBooksInfo.get(position).Department);
 //        holder.mTvFloor.setText(mBooksInfo.get(position).Floor);
-        holder.mTvArea.setText(mBooksInfo.get(position).Area);
+//        holder.mTvArea.setText(mBooksInfo.get(position).Area);
 //        holder.mTvShelf.setText(mBooksInfo.get(position).Shelf);
 //        holder.mTvShelfFloor.setText(mBooksInfo.get(position).ShelfFloor);
-        holder.mTvStar.setText(mBooksInfo.get(position).Star);
+//        holder.mTvStar.setText(mBooksInfo.get(position).Star);
 
         if (position == 0) {
             holder.mTvWriter.setText(mBooksInfo.get(position).Writer);
             holder.mTvBookName.setText(mBooksInfo.get(position).BookName);
             holder.mIv_BookImage.setImageResource(R.mipmap.bj_4);
-            holder.mTvWriterInfo.setText(mBooksInfo.get(position).WriterInfo);
+
+            Glide.with(mContext)
+                    .load(mBooksInfo.get(position).url)
+                    .fitCenter()
+                    .error(R.mipmap.image_book_1)
+                    .into(holder.mIv_BookImage);
+
             holder.mTvPress.setText(mBooksInfo.get(position).Press);
             holder.mTvPressingYear.setText(mBooksInfo.get(position).PressingYear);
             holder.mTvDefaultComment.setText(mBooksInfo.get(position).DefaultComment);
-            holder.mTvStar.setVisibility(View.GONE);
+
         } else {
             holder.mTvWriter.setVisibility(View.GONE);
             holder.mTvBookName.setVisibility(View.GONE);
             holder.mIv_BookImage.setVisibility(View.GONE);
-            holder.mTvWriterInfo.setVisibility(View.GONE);
+
             holder.mTvPress.setVisibility(View.GONE);
             holder.mTvPressingYear.setVisibility(View.GONE);
             holder.mTvDefaultComment.setVisibility(View.GONE);
-            holder.mTvStar.setVisibility(View.GONE);
-            holder.mTvBorrowingTimes.setVisibility(View.GONE);
-            holder.mTvindexNumber.setVisibility(View.GONE);
+            holder.mFakeComment.setVisibility(View.GONE);
+            holder.mFakeLocal.setVisibility(View.GONE);
+            holder.mFakestar.setVisibility(View.GONE);
+
         }
 
 
@@ -87,25 +95,32 @@ public class mBooksInfoAdapter extends RecyclerView.Adapter<mBooksInfoAdapter.Li
         private ImageView mIv_BookImage;
         private TextView mTvBookName, mTvindexNumber, mTvWriter, mTvWriterInfo, mTvPress, mTvPressingYear, mTvBorrowingTimes, mTvStatus, mTvDepartment, mTvArea, mTvDefaultComment, mTvStar;
 
+        private TextView mFakeComment,mFakeCommentInfo;
+        private ImageView mFakestar,mFakeLocal;
         public LinearViewHolder(View itemView) {
             super(itemView);
+
+            mFakeComment=itemView.findViewById(R.id.fake_context);
+            mFakeLocal=itemView.findViewById(R.id.fake_shelflocal);
+            mFakestar=itemView.findViewById(R.id.fake_star);
+
             mIv_BookImage = itemView.findViewById(R.id.rv_newbooks_image);
 
             mTvBookName = itemView.findViewById(R.id.rv_booksinfo_BookName);
-            mTvindexNumber = itemView.findViewById(R.id.rv_booksinfo_indexNumber);
+//            mTvindexNumber = itemView.findViewById(R.id.rv_booksinfo_indexNumber);
             mTvWriter = itemView.findViewById(R.id.rv_booksinfo_Writer);
-            mTvWriterInfo = itemView.findViewById(R.id.rv_booksinfo_WriterInfo);
+//            mTvWriterInfo = itemView.findViewById(R.id.rv_booksinfo_WriterInfo);
             mTvPress = itemView.findViewById(R.id.rv_booksinfo_Press);
             mTvPressingYear = itemView.findViewById(R.id.rv_booksinfo_PressingYear);
-            mTvBorrowingTimes = itemView.findViewById(R.id.rv_booksinfo_BorrowingTimes);
-            mTvStatus = itemView.findViewById(R.id.rv_booksinfo_Status);
-            mTvDepartment = itemView.findViewById(R.id.rv_booksinfo_Department);
+//            mTvBorrowingTimes = itemView.findViewById(R.id.rv_booksinfo_BorrowingTimes);
+//            mTvStatus = itemView.findViewById(R.id.rv_booksinfo_Status);
+//            mTvDepartment = itemView.findViewById(R.id.rv_booksinfo_Department);
 //            mTvFloor=itemView.findViewById(R.id.rv_booksinfo_Floor);
-            mTvArea=itemView.findViewById(R.id.rv_booksinfo_Area);
+//            mTvArea=itemView.findViewById(R.id.rv_booksinfo_Area);
 //            mTvShelf=itemView.findViewById(R.id.rv_booksinfo_Shelf);
 //            mTvShelfFloor=itemView.findViewById(R.id.rv_booksinfo_ShelfFloor);
-            mTvDefaultComment = itemView.findViewById(R.id.rv_booksinfo_DefaultComment);
-            mTvStar = itemView.findViewById(R.id.rv_booksinfo_Star);
+            mTvDefaultComment = itemView.findViewById(R.id.rv_info_context);
+//            mTvStar = itemView.findViewById(R.id.rv_booksinfo_Star);
         }
     }
 

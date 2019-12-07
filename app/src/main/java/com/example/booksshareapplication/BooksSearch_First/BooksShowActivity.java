@@ -12,6 +12,7 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.booksshareapplication.R;
 import com.example.booksshareapplication.Util.Course;
@@ -25,6 +26,7 @@ public class BooksShowActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         ViewPump.init(ViewPump.builder()
             .addInterceptor(new CalligraphyInterceptor(

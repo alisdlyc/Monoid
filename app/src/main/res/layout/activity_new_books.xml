@@ -6,30 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".BooksSearch_First.BooksShowActivity"
-    tools:ignore="MissingPrefix">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/newbooks_banner">
-    </ImageView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="HelloWorld"
-        android:textSize="20sp"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        >
-    </TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="HelloWorld"
-        android:textSize="20sp"
-        android:layout_height="wrap_content">
-    </TextView>
+    tools:ignore="MissingPrefix"
+    android:background="@color/b_back">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newbooks_center_rv"
