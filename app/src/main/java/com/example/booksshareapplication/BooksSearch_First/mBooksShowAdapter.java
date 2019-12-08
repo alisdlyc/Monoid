@@ -60,13 +60,13 @@ public class mBooksShowAdapter extends RecyclerView.Adapter<mBooksShowAdapter.Li
         //修改布局文件控件的值来输出所有的书籍
         //根据positon的不同，来填入不同的书籍
 
-//            holder.mView.setBackgroundColor(R.drawable.back_white);
-        if(position%2==0){
-
-            holder.mView.setBackgroundResource(R.drawable.back_gray);
-        }else {
-                ;
-        }
+        /// 轮换背景颜色
+//        if(position%2==0){
+//
+//            holder.mView.setBackgroundResource(R.drawable.back_gray);
+//        }else {
+//                ;
+//        }
 
 
         holder.mIv_BookImage.setImageResource(R.mipmap.bj_4);
